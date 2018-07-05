@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Openstack,Tacker," />
 
 
 
@@ -79,16 +79,20 @@
 
 
 
-<meta name="description" content="学着去分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WooOh&#39;s blog">
-<meta property="og:url" content="http://cao0507.github.io/archives/index.html">
+<meta name="description" content="概述本文参考官方文档，在现有的openstack平台上，手动安装Tacker。基础的openstack平台包含了最核心的keystone、glance、nova、neutron、horizon这5个组件，但是Tacker还需要预先安装好Mistral和Barbican这两个组件，在安装好这两个组件后就可以开始按照以下步骤安装Tacker了。">
+<meta name="keywords" content="Openstack,Tacker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Openstack环境下手动安装Tacker">
+<meta property="og:url" content="http://cao0507.github.io/2017/12/23/Openstack环境下手动安装Tacker/index.html">
 <meta property="og:site_name" content="WooOh&#39;s blog">
-<meta property="og:description" content="学着去分享">
+<meta property="og:description" content="概述本文参考官方文档，在现有的openstack平台上，手动安装Tacker。基础的openstack平台包含了最核心的keystone、glance、nova、neutron、horizon这5个组件，但是Tacker还需要预先安装好Mistral和Barbican这两个组件，在安装好这两个组件后就可以开始按照以下步骤安装Tacker了。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://img.blog.csdn.net/20171223202742999?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2FvMDUwNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:updated_time" content="2018-07-05T07:11:36.805Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WooOh&#39;s blog">
-<meta name="twitter:description" content="学着去分享">
+<meta name="twitter:title" content="Openstack环境下手动安装Tacker">
+<meta name="twitter:description" content="概述本文参考官方文档，在现有的openstack平台上，手动安装Tacker。基础的openstack平台包含了最核心的keystone、glance、nova、neutron、horizon这5个组件，但是Tacker还需要预先安装好Mistral和Barbican这两个组件，在安装好这两个组件后就可以开始按照以下步骤安装Tacker了。">
+<meta name="twitter:image" content="http://img.blog.csdn.net/20171223202742999?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2FvMDUwNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
 
 
 
@@ -118,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://cao0507.github.io/archives/"/>
+  <link rel="canonical" href="http://cao0507.github.io/2017/12/23/Openstack环境下手动安装Tacker/"/>
 
 
 
 
 
-  <title>归档 | WooOh's blog</title>
+  <title>Openstack环境下手动安装Tacker | WooOh's blog</title>
   
 
 
@@ -153,7 +157,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,190 +295,294 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2017/12/23/Openstack环境下手动安装Tacker/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WooOh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WooOh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Openstack环境下手动安装Tacker</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-23T14:12:37+08:00">
+                2017-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 4 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Openstack/" itemprop="url" rel="index">
+                    <span itemprop="name">Openstack</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/22/虚拟化技术与云计算平台报告/" itemprop="url">
-              
-                <span itemprop="name">虚拟化技术与云计算平台报告</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-22T00:23:23+08:00"
-              content="2018-03-22" >
-          03-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/23/Openstack环境下手动安装Mistral/" itemprop="url">
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
               
-                <span itemprop="name">Openstack环境下手动安装Mistral</span>
+                <a href="/2017/12/23/Openstack环境下手动安装Tacker/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2017/12/23/Openstack环境下手动安装Tacker/" itemprop="commentsCount"></span>
+                </a>
               
-            </a>
-        
-      </h2>
+            
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-23T23:12:22+08:00"
-              content="2017-12-23" >
-          12-23
-        </time>
-      </div>
+          
+          
+             <span id="/2017/12/23/Openstack环境下手动安装Tacker/" class="leancloud_visitors" data-flag-title="Openstack环境下手动安装Tacker">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-    </header>
-  </article>
+          
 
+          
+            <div class="post-wordcount">
+              
 
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  4 mins
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/23/Openstack环境下手动安装Tacker/" itemprop="url">
-              
-                <span itemprop="name">Openstack环境下手动安装Tacker</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-23T14:12:37+08:00"
-              content="2017-12-23" >
-          12-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/03/KVM虚拟机部署openstack的网络配置/" itemprop="url">
-              
-                <span itemprop="name">KVM虚拟机部署openstack的网络配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-03T12:34:35+08:00"
-              content="2017-12-03" >
-          12-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文参考官方文档，在现有的openstack平台上，手动安装Tacker。基础的openstack平台包含了最核心的keystone、glance、nova、neutron、horizon这5个组件，但是Tacker还需要预先安装好Mistral和Barbican这两个组件，在安装好这两个组件后就可以开始按照以下步骤安装Tacker了。<br><a id="more"></a><br>参考：<a href="https://docs.openstack.org/tacker/latest/install/manual_installation.html" target="_blank" rel="noopener"><em>官方文档链接</em></a></p>
+<p><strong>注：</strong> 本文涉及到的密码都统一设置成<em>openstack</em>。</p>
+<h1 id="一、安装Tacker-server"><a href="#一、安装Tacker-server" class="headerlink" title="一、安装Tacker server"></a>一、安装Tacker server</h1><h2 id="1、创建数据库"><a href="#1、创建数据库" class="headerlink" title="1、创建数据库"></a>1、创建数据库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># mysql</span><br><span class="line">MariaDB [(none)]&gt; CREATE DATABASE tacker;</span><br><span class="line">MariaDB [tacker]&gt; GRANT ALL PRIVILEGES ON tacker.* TO &apos;tacker&apos;@&apos;localhost&apos; IDENTIFIED BY &apos;openstack&apos;;</span><br><span class="line">MariaDB [tacker]&gt; GRANT ALL PRIVILEGES ON tacker.* TO &apos;tacker&apos;@&apos;%&apos; IDENTIFIED BY &apos;openstack&apos;;</span><br><span class="line">MariaDB [tacker]&gt; exit;</span><br></pre></td></tr></table></figure>
+<h2 id="2、创建user、role、endpoints"><a href="#2、创建user、role、endpoints" class="headerlink" title="2、创建user、role、endpoints"></a>2、创建user、role、endpoints</h2><h3 id="1-获得admin凭证"><a href="#1-获得admin凭证" class="headerlink" title="1)获得admin凭证"></a>1)获得admin凭证</h3><pre><code># . admin-openrc
+</code></pre><h3 id="2-创建tacker用户，密码为openstack"><a href="#2-创建tacker用户，密码为openstack" class="headerlink" title="2)创建tacker用户，密码为openstack"></a>2)创建tacker用户，密码为openstack</h3><pre><code># openstack user create --domain default --password openstack tacker
+</code></pre><h3 id="3-给tacker用户赋予admin权限"><a href="#3-给tacker用户赋予admin权限" class="headerlink" title="3)给tacker用户赋予admin权限"></a>3)给tacker用户赋予admin权限</h3><pre><code># openstack role add --project service --user tacker admin
+</code></pre><h3 id="4-创建tacker服务"><a href="#4-创建tacker服务" class="headerlink" title="4)创建tacker服务"></a>4)创建tacker服务</h3><pre><code># openstack service create --name tacker \
+    --description &quot;Tacker Project&quot; nfv-orchestration
+</code></pre><h3 id="5-创建endpoints"><a href="#5-创建endpoints" class="headerlink" title="5)创建endpoints"></a>5)创建endpoints</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># openstack endpoint create --region RegionOne nfv-orchestration \</span><br><span class="line">           public http://controller:9890/</span><br><span class="line"># openstack endpoint create --region RegionOne nfv-orchestration \</span><br><span class="line">           internal http://controller:9890/</span><br><span class="line"># openstack endpoint create --region RegionOne nfv-orchestration \</span><br><span class="line">           admin http://controller:9890/</span><br></pre></td></tr></table></figure>
+<h2 id="3、下载Tacker源码"><a href="#3、下载Tacker源码" class="headerlink" title="3、下载Tacker源码"></a>3、下载Tacker源码</h2><pre><code># git clone https://github.com/openstack/tacker -b stable/ocata
+</code></pre><h2 id="4、安装Tacker环境依赖包"><a href="#4、安装Tacker环境依赖包" class="headerlink" title="4、安装Tacker环境依赖包"></a>4、安装Tacker环境依赖包</h2><pre><code># cd tacker
+# pip install -r requirements.txt
+</code></pre><h2 id="5、安装Tacker"><a href="#5、安装Tacker" class="headerlink" title="5、安装Tacker"></a>5、安装Tacker</h2><pre><code># python setup.py install
+</code></pre><h2 id="6、创建Tacker日志文件夹"><a href="#6、创建Tacker日志文件夹" class="headerlink" title="6、创建Tacker日志文件夹"></a>6、创建Tacker日志文件夹</h2><pre><code># mkdir -p /var/log/tacker
+</code></pre><h2 id="7、生成配置文件"><a href="#7、生成配置文件" class="headerlink" title="7、生成配置文件"></a>7、生成配置文件</h2><pre><code># ./tools/generate_config_file_sample.sh
+这时生成的配置文件在etc/tacker/tacker.conf.sample，需要将其重命名为tacker.conf
+# mv etc/tacker/tacker.conf.sample  etc/tacker/tacker.conf
+</code></pre><h2 id="8、修改配置文件"><a href="#8、修改配置文件" class="headerlink" title="8、修改配置文件"></a>8、修改配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"># vi etc/tacker/tacker.conf</span><br><span class="line"></span><br><span class="line">[DEFAULT]</span><br><span class="line">auth_strategy = keystone</span><br><span class="line">policy_file = /usr/local/etc/tacker/policy.json</span><br><span class="line">debug = True</span><br><span class="line">use_syslog = False</span><br><span class="line">bind_host = 10.0.0.11</span><br><span class="line">bind_port = 9890</span><br><span class="line">service_plugins = nfvo,vnfm</span><br><span class="line"></span><br><span class="line">state_path = /var/lib/tacker</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[nfvo]</span><br><span class="line">vim_drivers = openstack</span><br><span class="line"></span><br><span class="line">[keystone_authtoken]</span><br><span class="line">memcached_servers = 11211</span><br><span class="line">region_name = RegionOne</span><br><span class="line">auth_type = password</span><br><span class="line">project_domain_name = Default</span><br><span class="line">user_domain_name = Default</span><br><span class="line">username = tacker</span><br><span class="line">project_name = service</span><br><span class="line">password = openstack</span><br><span class="line">auth_url = http://controller:35357</span><br><span class="line">auth_uri = http://controller:5000</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">[agent]</span><br><span class="line">root_helper = sudo /usr/local/bin/tacker-rootwrap /usr/local/etc/tacker/rootwrap.conf</span><br><span class="line"></span><br><span class="line">[database]</span><br><span class="line">connection = mysql://tacker:openstack@controller:3306/tacker?charset=utf8</span><br><span class="line"></span><br><span class="line">[tacker]</span><br><span class="line">monitor_driver = ping,http_ping</span><br></pre></td></tr></table></figure>
+<h2 id="9、复制配置文件到配置文件夹"><a href="#9、复制配置文件到配置文件夹" class="headerlink" title="9、复制配置文件到配置文件夹"></a>9、复制配置文件到配置文件夹</h2><pre><code># cp etc/tacker/tacker.conf  /usr/local/etc/tacker/
+</code></pre><h2 id="10、初始化数据库信息"><a href="#10、初始化数据库信息" class="headerlink" title="10、初始化数据库信息"></a>10、初始化数据库信息</h2><pre><code># /usr/local/bin/tacker-db-manage --config-file /usr/local/etc/tacker/tacker.conf upgrade head
+</code></pre><h1 id="二、安装Tacker-client"><a href="#二、安装Tacker-client" class="headerlink" title="二、安装Tacker client"></a>二、安装Tacker client</h1><h2 id="1、下载Tacker-client源码"><a href="#1、下载Tacker-client源码" class="headerlink" title="1、下载Tacker-client源码"></a>1、下载Tacker-client源码</h2><pre><code># git clone https://github.com/openstack/python-tackerclient -b stable/ocata
+</code></pre><h2 id="2、安装Tacker-client模块"><a href="#2、安装Tacker-client模块" class="headerlink" title="2、安装Tacker-client模块"></a>2、安装Tacker-client模块</h2><pre><code># cd python-tackerclient
+# python setup.py install
+</code></pre><h1 id="三、安装Tacker-horizon"><a href="#三、安装Tacker-horizon" class="headerlink" title="三、安装Tacker horizon"></a>三、安装Tacker horizon</h1><h2 id="1、下载Tacker-horizon源码"><a href="#1、下载Tacker-horizon源码" class="headerlink" title="1、下载Tacker-horizon源码"></a>1、下载Tacker-horizon源码</h2><pre><code># git clone https://github.com/openstack/tacker-horizon -b stable/ocata
+</code></pre><h2 id="2、安装Tacker-horizon模块"><a href="#2、安装Tacker-horizon模块" class="headerlink" title="2、安装Tacker-horizon模块"></a>2、安装Tacker-horizon模块</h2><pre><code># cd tacker-horizon
+# python setup.py install
+</code></pre><p>安装好tacker-horizon后，admin用户登录dashboard界面就可以看到Tacker相关的VNFM和NFVO，如图：<br><img src="http://img.blog.csdn.net/20171223202742999?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2FvMDUwNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="tacker-horizon"></p>
+<h1 id="四、开启Tacker-server"><a href="#四、开启Tacker-server" class="headerlink" title="四、开启Tacker server"></a>四、开启Tacker server</h1><p>打开一个新的终端，开启Tacker-server，因为Tacker-server的程序会独占这个终端。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo python /usr/local/bin/tacker-server \</span><br><span class="line">    --config-file /usr/local/etc/tacker/tacker.conf \</span><br><span class="line">    --log-file /var/log/tacker/tacker.log</span><br></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>需注意的一个问题：</strong></p>
+<p>在安装完Tacker而没有装Mistral时创建VIM的结果如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">root@controller:/home/openstack# tacker vim-register --is-default --config-file config.yaml test_vim</span><br><span class="line">The resource could not be found.</span><br><span class="line"></span><br><span class="line">或者是这种错误：Expecting to find domain in project. The server could not comply with the request since it is either malformed or otherwise incorrect. The client is assumed to be in error.</span><br></pre></td></tr></table></figure></p>
+<p>经过查阅资料，知道这个问题是因为Tacker在创建VIM时要调用Mistral而造成的。所以在使用tacker之前需要先安装好Mistral（可以在安装tacker前安装Mistral，也可以在tacker安装之后安装Mistral，后续还需继续了解）。</p>
+<hr>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的阅读，希望您能从中获益! (^_^)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="WooOh 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="WooOh 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    WooOh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://cao0507.github.io/2017/12/23/Openstack环境下手动安装Tacker/" title="Openstack环境下手动安装Tacker">http://cao0507.github.io/2017/12/23/Openstack环境下手动安装Tacker/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Openstack/" rel="tag"># Openstack</a>
+          
+            <a href="/tags/Tacker/" rel="tag"># Tacker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/03/KVM虚拟机部署openstack的网络配置/" rel="next" title="KVM虚拟机部署openstack的网络配置">
+                <i class="fa fa-chevron-left"></i> KVM虚拟机部署openstack的网络配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/12/23/Openstack环境下手动安装Mistral/" rel="prev" title="Openstack环境下手动安装Mistral">
+                Openstack环境下手动安装Mistral <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -482,6 +590,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -502,8 +619,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -595,6 +721,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一、安装Tacker-server"><span class="nav-number">2.</span> <span class="nav-text">一、安装Tacker server</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、创建数据库"><span class="nav-number">2.1.</span> <span class="nav-text">1、创建数据库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、创建user、role、endpoints"><span class="nav-number">2.2.</span> <span class="nav-text">2、创建user、role、endpoints</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-获得admin凭证"><span class="nav-number">2.2.1.</span> <span class="nav-text">1)获得admin凭证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建tacker用户，密码为openstack"><span class="nav-number">2.2.2.</span> <span class="nav-text">2)创建tacker用户，密码为openstack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-给tacker用户赋予admin权限"><span class="nav-number">2.2.3.</span> <span class="nav-text">3)给tacker用户赋予admin权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-创建tacker服务"><span class="nav-number">2.2.4.</span> <span class="nav-text">4)创建tacker服务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-创建endpoints"><span class="nav-number">2.2.5.</span> <span class="nav-text">5)创建endpoints</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、下载Tacker源码"><span class="nav-number">2.3.</span> <span class="nav-text">3、下载Tacker源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、安装Tacker环境依赖包"><span class="nav-number">2.4.</span> <span class="nav-text">4、安装Tacker环境依赖包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5、安装Tacker"><span class="nav-number">2.5.</span> <span class="nav-text">5、安装Tacker</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6、创建Tacker日志文件夹"><span class="nav-number">2.6.</span> <span class="nav-text">6、创建Tacker日志文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7、生成配置文件"><span class="nav-number">2.7.</span> <span class="nav-text">7、生成配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8、修改配置文件"><span class="nav-number">2.8.</span> <span class="nav-text">8、修改配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9、复制配置文件到配置文件夹"><span class="nav-number">2.9.</span> <span class="nav-text">9、复制配置文件到配置文件夹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10、初始化数据库信息"><span class="nav-number">2.10.</span> <span class="nav-text">10、初始化数据库信息</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、安装Tacker-client"><span class="nav-number">3.</span> <span class="nav-text">二、安装Tacker client</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、下载Tacker-client源码"><span class="nav-number">3.1.</span> <span class="nav-text">1、下载Tacker-client源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、安装Tacker-client模块"><span class="nav-number">3.2.</span> <span class="nav-text">2、安装Tacker-client模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、安装Tacker-horizon"><span class="nav-number">4.</span> <span class="nav-text">三、安装Tacker horizon</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、下载Tacker-horizon源码"><span class="nav-number">4.1.</span> <span class="nav-text">1、下载Tacker-horizon源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、安装Tacker-horizon模块"><span class="nav-number">4.2.</span> <span class="nav-text">2、安装Tacker-horizon模块</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、开启Tacker-server"><span class="nav-number">5.</span> <span class="nav-text">四、开启Tacker server</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -760,6 +902,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
