@@ -87,12 +87,12 @@
 <meta property="og:site_name" content="WooOh&#39;s blog">
 <meta property="og:description" content="概述本文参考官方文档，在现有的openstack平台上，手动安装Tacker。基础的openstack平台包含了最核心的keystone、glance、nova、neutron、horizon这5个组件，但是Tacker还需要预先安装好Mistral和Barbican这两个组件，在安装好这两个组件后就可以开始按照以下步骤安装Tacker了。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img.blog.csdn.net/20171223202742999?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2FvMDUwNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
-<meta property="og:updated_time" content="2018-07-05T07:11:36.805Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/cao0507/Pictures/master/blog/tacker%20horizon.png">
+<meta property="og:updated_time" content="2018-07-05T07:19:04.589Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Openstack环境下手动安装Tacker">
 <meta name="twitter:description" content="概述本文参考官方文档，在现有的openstack平台上，手动安装Tacker。基础的openstack平台包含了最核心的keystone、glance、nova、neutron、horizon这5个组件，但是Tacker还需要预先安装好Mistral和Barbican这两个组件，在安装好这两个组件后就可以开始按照以下步骤安装Tacker了。">
-<meta name="twitter:image" content="http://img.blog.csdn.net/20171223202742999?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2FvMDUwNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cao0507/Pictures/master/blog/tacker%20horizon.png">
 
 
 
@@ -464,7 +464,7 @@
 </code></pre><h1 id="三、安装Tacker-horizon"><a href="#三、安装Tacker-horizon" class="headerlink" title="三、安装Tacker horizon"></a>三、安装Tacker horizon</h1><h2 id="1、下载Tacker-horizon源码"><a href="#1、下载Tacker-horizon源码" class="headerlink" title="1、下载Tacker-horizon源码"></a>1、下载Tacker-horizon源码</h2><pre><code># git clone https://github.com/openstack/tacker-horizon -b stable/ocata
 </code></pre><h2 id="2、安装Tacker-horizon模块"><a href="#2、安装Tacker-horizon模块" class="headerlink" title="2、安装Tacker-horizon模块"></a>2、安装Tacker-horizon模块</h2><pre><code># cd tacker-horizon
 # python setup.py install
-</code></pre><p>安装好tacker-horizon后，admin用户登录dashboard界面就可以看到Tacker相关的VNFM和NFVO，如图：<br><img src="http://img.blog.csdn.net/20171223202742999?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvY2FvMDUwNw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="tacker-horizon"></p>
+</code></pre><p>安装好tacker-horizon后，admin用户登录dashboard界面就可以看到Tacker相关的VNFM和NFVO，如图：<br><img src="https://raw.githubusercontent.com/cao0507/Pictures/master/blog/tacker%20horizon.png" alt="tacker-horizon"></p>
 <h1 id="四、开启Tacker-server"><a href="#四、开启Tacker-server" class="headerlink" title="四、开启Tacker server"></a>四、开启Tacker server</h1><p>打开一个新的终端，开启Tacker-server，因为Tacker-server的程序会独占这个终端。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo python /usr/local/bin/tacker-server \</span><br><span class="line">    --config-file /usr/local/etc/tacker/tacker.conf \</span><br><span class="line">    --log-file /var/log/tacker/tacker.log</span><br></pre></td></tr></table></figure></p>
 <hr>
 <p><strong>需注意的一个问题：</strong></p>

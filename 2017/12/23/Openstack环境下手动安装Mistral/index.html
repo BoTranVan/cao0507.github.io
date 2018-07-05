@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Openstack,Mistral,Tacker," />
+  <meta name="keywords" content="Openstack,Tacker,Mistral," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="概述在openstack平台中能够成功安装Tacker，但是安装的Tacker并不能用，因为在tacker中创建VIM时需要调用Mistral工作流组件。因此本文就来介绍在openstack环境中手动安装Mistral的过程。">
-<meta name="keywords" content="Openstack,Mistral,Tacker">
+<meta name="keywords" content="Openstack,Tacker,Mistral">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Openstack环境下手动安装Mistral">
 <meta property="og:url" content="http://cao0507.github.io/2017/12/23/Openstack环境下手动安装Mistral/index.html">
@@ -88,7 +88,7 @@
 <meta property="og:description" content="概述在openstack平台中能够成功安装Tacker，但是安装的Tacker并不能用，因为在tacker中创建VIM时需要调用Mistral工作流组件。因此本文就来介绍在openstack环境中手动安装Mistral的过程。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://raw.githubusercontent.com/cao0507/Pictures/master/blog/mistral%20horizon.png">
-<meta property="og:updated_time" content="2018-07-05T07:11:59.113Z">
+<meta property="og:updated_time" content="2018-07-05T07:26:30.389Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Openstack环境下手动安装Mistral">
 <meta name="twitter:description" content="概述在openstack平台中能够成功安装Tacker，但是安装的Tacker并不能用，因为在tacker中创建VIM时需要调用Mistral工作流组件。因此本文就来介绍在openstack环境中手动安装Mistral的过程。">
@@ -441,7 +441,7 @@
         <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在openstack平台中能够成功安装Tacker，但是安装的Tacker并不能用，因为在tacker中创建VIM时需要调用Mistral工作流组件。因此本文就来介绍在openstack环境中手动安装Mistral的过程。</p>
 <a id="more"></a>
 <p><strong>注：</strong> 安装的openstack是在Ubuntu 16.04系统下的Ocata版本；本文中涉及的密码都统一设置成 <em>“openstack”</em>。</p>
-<p>参考另一篇博客关于<a href="https://cao0507.github.io/2017/12/03/KVM%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%83%A8%E7%BD%B2openstack%E7%9A%84%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE/http://blog.csdn.net/cao0507/article/details/78882022"><em>openstack环境下安装Tacker</em></a>，<br>参考<a href="https://docs.openstack.org/mistral/latest/install/installation_guide.html" target="_blank" rel="noopener"><em>官方文档</em></a></p>
+<p>参考<a href="https://docs.openstack.org/mistral/latest/install/installation_guide.html" target="_blank" rel="noopener"><em>官方文档</em></a></p>
 <h1 id="一、安装必要组件"><a href="#一、安装必要组件" class="headerlink" title="一、安装必要组件"></a>一、安装必要组件</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ apt-get install python-dev python-setuptools python-pip libffi-dev \</span><br><span class="line">  libxslt1-dev libxml2-dev libyaml-dev libssl-dev</span><br></pre></td></tr></table></figure>
 <h1 id="二、安装Mistral-server"><a href="#二、安装Mistral-server" class="headerlink" title="二、安装Mistral server"></a>二、安装Mistral server</h1><h2 id="1、下载Mistral源码，并进入下载目录"><a href="#1、下载Mistral源码，并进入下载目录" class="headerlink" title="1、下载Mistral源码，并进入下载目录"></a>1、下载Mistral源码，并进入下载目录</h2><pre><code>$ git clone https://github.com/openstack/mistral.git
 $ cd mistral
@@ -537,9 +537,9 @@ $ python setup.py install
           
             <a href="/tags/Openstack/" rel="tag"># Openstack</a>
           
-            <a href="/tags/Mistral/" rel="tag"># Mistral</a>
-          
             <a href="/tags/Tacker/" rel="tag"># Tacker</a>
+          
+            <a href="/tags/Mistral/" rel="tag"># Mistral</a>
           
         </div>
       
