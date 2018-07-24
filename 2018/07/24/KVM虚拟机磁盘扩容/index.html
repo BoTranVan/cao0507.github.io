@@ -83,14 +83,14 @@
 <meta name="description" content="概述在 KVM 环境中，通常通过创建一个各种格式的磁盘来安装虚拟机，可能创建时你觉得大小够用，但是可能用着用着到了某一天你发现你的磁盘容量不够用了，很多程序都打不开，你可能会很慌，其实并不需要慌，因为有很多方法可以给你的虚拟机扩容，哈哈哈，如：  通过virsh attach-disk添加一个新的磁盘 通过virsh attach-device添加一个新的存储设备 直接给原来用的磁盘扩容">
 <meta name="keywords" content="KVM,磁盘扩容,df,fdisk,mkfs,mount">
 <meta property="og:type" content="article">
-<meta property="og:title" content="KVM 虚拟机磁盘扩容.md">
-<meta property="og:url" content="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容-md/index.html">
+<meta property="og:title" content="KVM 虚拟机磁盘扩容">
+<meta property="og:url" content="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容/index.html">
 <meta property="og:site_name" content="WooOh&#39;s blog">
 <meta property="og:description" content="概述在 KVM 环境中，通常通过创建一个各种格式的磁盘来安装虚拟机，可能创建时你觉得大小够用，但是可能用着用着到了某一天你发现你的磁盘容量不够用了，很多程序都打不开，你可能会很慌，其实并不需要慌，因为有很多方法可以给你的虚拟机扩容，哈哈哈，如：  通过virsh attach-disk添加一个新的磁盘 通过virsh attach-device添加一个新的存储设备 直接给原来用的磁盘扩容">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-24T15:09:52.306Z">
+<meta property="og:updated_time" content="2018-07-24T16:22:12.939Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="KVM 虚拟机磁盘扩容.md">
+<meta name="twitter:title" content="KVM 虚拟机磁盘扩容">
 <meta name="twitter:description" content="概述在 KVM 环境中，通常通过创建一个各种格式的磁盘来安装虚拟机，可能创建时你觉得大小够用，但是可能用着用着到了某一天你发现你的磁盘容量不够用了，很多程序都打不开，你可能会很慌，其实并不需要慌，因为有很多方法可以给你的虚拟机扩容，哈哈哈，如：  通过virsh attach-disk添加一个新的磁盘 通过virsh attach-device添加一个新的存储设备 直接给原来用的磁盘扩容">
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容-md/"/>
+  <link rel="canonical" href="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容/"/>
 
 
 
 
 
-  <title>KVM 虚拟机磁盘扩容.md | WooOh's blog</title>
+  <title>KVM 虚拟机磁盘扩容 | WooOh's blog</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容-md/">
+    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="WooOh">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">KVM 虚拟机磁盘扩容.md</h1>
+          <h1 class="post-title" itemprop="name headline">KVM 虚拟机磁盘扩容</h1>
         
 
         <div class="post-meta">
@@ -379,8 +379,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/07/24/KVM虚拟机磁盘扩容-md/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/07/24/KVM虚拟机磁盘扩容-md/" itemprop="commentsCount"></span>
+                <a href="/2018/07/24/KVM虚拟机磁盘扩容/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/07/24/KVM虚拟机磁盘扩容/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -388,7 +388,7 @@
 
           
           
-             <span id="/2018/07/24/KVM虚拟机磁盘扩容-md/" class="leancloud_visitors" data-flag-title="KVM 虚拟机磁盘扩容.md">
+             <span id="/2018/07/24/KVM虚拟机磁盘扩容/" class="leancloud_visitors" data-flag-title="KVM 虚拟机磁盘扩容">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -636,7 +636,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容-md/" title="KVM 虚拟机磁盘扩容.md">http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容-md/</a>
+    <a href="http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容/" title="KVM 虚拟机磁盘扩容">http://cao0507.github.io/2018/07/24/KVM虚拟机磁盘扩容/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
