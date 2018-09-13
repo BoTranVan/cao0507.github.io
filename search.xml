@@ -169,10 +169,10 @@
         <category>云计算</category>
       </categories>
       <tags>
+        <tag>KVM</tag>
+        <tag>Openstack</tag>
         <tag>云计算</tag>
         <tag>虚拟化</tag>
-        <tag>Openstack</tag>
-        <tag>KVM</tag>
       </tags>
   </entry>
   <entry>
@@ -208,8 +208,8 @@
         <category>KVM</category>
       </categories>
       <tags>
-        <tag>Openstack</tag>
         <tag>KVM</tag>
+        <tag>Openstack</tag>
         <tag>vnc</tag>
         <tag>ubuntu</tag>
         <tag>Virtual Machine</tag>
