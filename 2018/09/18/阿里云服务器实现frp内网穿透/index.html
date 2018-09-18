@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="SSH,frp,内网穿透,aliyun,安全组规则," />
 
 
 
@@ -80,16 +80,23 @@
 
 
 
-<meta name="description" content="学着去分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WooOh&#39;s blog">
-<meta property="og:url" content="http://cao0507.github.io/tags/vim/index.html">
+<meta name="description" content="前言前几天在一台具有公网IP的 vultr 云服务器上实现了 frp 内网穿透（参考链接），可以从寝室 ssh 登录到教研室的服务器，但是由于 vultr 的云服务器位于国外的节点，连接速度太慢了，导致连接 ssh 登录的体验很差。今天又弄了一台阿里云的云服务器 ECS，所以现在来介绍如何在阿里云上实现 frp 内网穿透。">
+<meta name="keywords" content="SSH,frp,内网穿透,aliyun,安全组规则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="阿里云服务器实现 frp 内网穿透">
+<meta property="og:url" content="http://cao0507.github.io/2018/09/18/阿里云服务器实现frp内网穿透/index.html">
 <meta property="og:site_name" content="WooOh&#39;s blog">
-<meta property="og:description" content="学着去分享">
+<meta property="og:description" content="前言前几天在一台具有公网IP的 vultr 云服务器上实现了 frp 内网穿透（参考链接），可以从寝室 ssh 登录到教研室的服务器，但是由于 vultr 的云服务器位于国外的节点，连接速度太慢了，导致连接 ssh 登录的体验很差。今天又弄了一台阿里云的云服务器 ECS，所以现在来介绍如何在阿里云上实现 frp 内网穿透。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20instance%20info.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20group%20rules.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20groups%20rules%20setting.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20group%20rules%20adding.jpg">
+<meta property="og:updated_time" content="2018-09-18T07:09:27.447Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WooOh&#39;s blog">
-<meta name="twitter:description" content="学着去分享">
+<meta name="twitter:title" content="阿里云服务器实现 frp 内网穿透">
+<meta name="twitter:description" content="前言前几天在一台具有公网IP的 vultr 云服务器上实现了 frp 内网穿透（参考链接），可以从寝室 ssh 登录到教研室的服务器，但是由于 vultr 的云服务器位于国外的节点，连接速度太慢了，导致连接 ssh 登录的体验很差。今天又弄了一台阿里云的云服务器 ECS，所以现在来介绍如何在阿里云上实现 frp 内网穿透。">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20instance%20info.jpg">
 
 
 
@@ -119,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://cao0507.github.io/tags/vim/"/>
+  <link rel="canonical" href="http://cao0507.github.io/2018/09/18/阿里云服务器实现frp内网穿透/"/>
 
 
 
 
 
-  <title>标签: vim | WooOh's blog</title>
+  <title>阿里云服务器实现 frp 内网穿透 | WooOh's blog</title>
   
 
 
@@ -154,7 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left ">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,54 +299,337 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>vim<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2018/09/18/阿里云服务器实现frp内网穿透/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WooOh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WooOh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/2018/08/23/迁移vim-python开发环境/" itemprop="url">
-              
-                <span itemprop="name">迁移vim-python开发环境</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">阿里云服务器实现 frp 内网穿透</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-08-23T16:06:23+08:00"
-              content="2018-08-23" >
-          08-23
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-18T15:06:08+08:00">
+                2018-09-18
+              </time>
+            
 
-    </header>
-  </article>
+            
 
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/09/18/阿里云服务器实现frp内网穿透/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/09/18/阿里云服务器实现frp内网穿透/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/09/18/阿里云服务器实现frp内网穿透/" class="leancloud_visitors" data-flag-title="阿里云服务器实现 frp 内网穿透">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  8 mins
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前几天在一台具有公网IP的 vultr 云服务器上实现了 frp 内网穿透<a href="https://cao0507.github.io/2018/09/14/frp%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F%E5%AE%9E%E7%8E%B0ssh%E8%AE%BF%E9%97%AE%E5%86%85%E7%BD%91%E6%9C%BA%E5%99%A8/">（参考链接）</a>，可以从寝室 ssh 登录到教研室的服务器，但是由于 vultr 的云服务器位于国外的节点，连接速度太慢了，导致连接 ssh 登录的体验很差。今天又弄了一台阿里云的云服务器 ECS，所以现在来介绍如何在阿里云上实现 frp 内网穿透。</p>
+<a id="more"></a>
+<h2 id="配置-ssh-访问内网机器"><a href="#配置-ssh-访问内网机器" class="headerlink" title="配置 ssh 访问内网机器"></a>配置 ssh 访问内网机器</h2><p>之前使用的 vultr 的VPS是 CentOS 系统的，这次阿里云服务器是 Ubuntu 的操作系统，但其实不同操作系统的云服务器在使用 frp 时操作都是一样的，就是<strong>下载</strong>，<strong>配置</strong>，<strong>运行</strong>。可能有区别的地方就是防火墙相关的配置，不同云服务厂商的镜像不同可能也有一些差别。下面来说明在阿里云的公网服务器的 frp 实现步骤：</p>
+<h4 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h4><p>在阿里云的公网服务器和内网机器上都要下载安装包并解压：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ wget https://github.com/fatedier/frp/releases/download/v0.21.0/frp_0.21.0_linux_amd64.tar.gz</span><br><span class="line">$ tar -xzvf frp_0.21.0_linux_amd64.tar.gz</span><br></pre></td></tr></table></figure>
+<p>解压之后的文件夹中既包含了服务端的文件又包括客户端的文件，所以可以分别在两个机器上删除掉不必要的文件，也可以不删，都没有影响。强迫症还是来删一下，在解压后的文件夹中： </p>
+<ul>
+<li><p>在公网服务器上删除客户端相关的文件，只保留一下两个文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frps  frps.ini</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在内网机器上删除服务端相关的文件，只保留以下两个文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">frpc   frpc.ini</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><p>就是需要修改配置文件 <code>frps.ini</code> 及 <code>frpc.ini</code>。</p>
+<ul>
+<li><p>修改公网服务器上的服务端配置文件 <code>frps.ini</code>，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">bind_port = 7000  #frp服务端端口（必须）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改内网目标主机的客户端配置文件 <code>frpc.ini</code>，如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[common]</span><br><span class="line">server_addr = xxx.xxx.xxx.xxx   #frp服务端地址，必须是公网ip或者域名，这里假设为xxx.xxx.xxx.xxx</span><br><span class="line">server_port = 7000      #frp服务端端口，即填写服务端配置中的 bind_port</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp              #连接类型，填tcp或udp</span><br><span class="line">local_ip = 127.0.0.1    #填127.0.0.1或内网ip都可以</span><br><span class="line">local_port = 22         #需要转发到的端口，ssh端口是22</span><br><span class="line">remote_port = 6000      #frp服务端的远程监听端口，即你访问服务端的remote_port就相当于访</span><br><span class="line">                        #问客户端的 local_port，如果填0则会随机分配一个端口</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h4><ul>
+<li><p>在公网服务器上运行服务端程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nohup ./frps -c frps.ini &amp;</span><br></pre></td></tr></table></figure>
+<p>查看 nohup.out 的信息，success</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f nohup.out</span><br><span class="line">2018/09/17 21:34:01 [I] [service.go:130] frps tcp listen on 0.0.0.0:7000</span><br><span class="line">2018/09/17 21:34:01 [I] [root.go:207] Start frps success</span><br><span class="line">2018/09/17 22:06:02 [I] [service.go:319] client login info: ip [125.71.229.32:60516] version [0.21.0] hostname [] os [linux] arch [amd64]</span><br><span class="line">2018/09/17 22:06:02 [I] [proxy.go:217] [7940291c148c2fca] [ssh] tcp proxy listen port [6000]</span><br><span class="line">2018/09/17 22:06:02 [I] [control.go:335] [7940291c148c2fca] new proxy [ssh] success</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在内网目标主机上运行客户端程序：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nohup ./frpc -c frpc.ini &amp;</span><br></pre></td></tr></table></figure>
+<p>查看 nohup.out 的信息，success</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ tail -f nohup.out</span><br><span class="line">2018/09/17 22:42:22 [I] [proxy_manager.go:300] proxy removed: []</span><br><span class="line">2018/09/17 22:42:22 [I] [proxy_manager.go:310] proxy added: [ssh1]</span><br><span class="line">2018/09/17 22:42:22 [I] [proxy_manager.go:333] visitor removed: []</span><br><span class="line">2018/09/17 22:42:22 [I] [proxy_manager.go:342] visitor added: []</span><br><span class="line">2018/09/17 22:42:23 [I] [control.go:246] [0624b332c3465118] login to server success, get run id [0624b332c3465118], server udp port [0]</span><br><span class="line">2018/09/17 22:42:23 [I] [control.go:169] [0624b332c3465118] [ssh1] start proxy success</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<h2 id="配置多个内网主机"><a href="#配置多个内网主机" class="headerlink" title="配置多个内网主机"></a>配置多个内网主机</h2><h4 id="错误的多客户端配置"><a href="#错误的多客户端配置" class="headerlink" title="错误的多客户端配置"></a>错误的多客户端配置</h4><p>使用一台阿里云的公网服务器，我们可以配置很多内网机器的 frp 内网穿透，公网服务器上只需要按照上述的配置一次即可，但是内网机器的配置稍有不同，如果使用了一样的配置则后添加的内网机器是无法连接上公网服务器的。这里假设另一台内网机器2的 frpc.ini 配置如下，来说明会遇到的问题：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ vi frpc.ini</span><br><span class="line">[common]</span><br><span class="line">server_addr = xxx.xxx.xxx.xxx  &lt;==这里还是按照上面的假设，公网服务器的ip为xxx.xxx.xxx.xxx</span><br><span class="line">server_port = 7000</span><br><span class="line"></span><br><span class="line">[ssh]</span><br><span class="line">type = tcp </span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6001     &lt;==remote_port设置为另一个值</span><br></pre></td></tr></table></figure>
+<p>两个内网主机的配置除了 remote_port 不一样之外，都是一样的。但是在内网机器2上运行 frpc 后，公网服务器的 nohup.out 中会记录一下的错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[W] [control.go:332] [280d36891a6ae0c7] new proxy [ssh] error: proxy name [ssh] is already in use</span><br></pre></td></tr></table></figure>
+<p>后来发现，frp 中是通过 [ssh] 这个名字来区分不同客户端的，所以不同的客户端要配置成不同的名字。</p>
+<h4 id="正确的多客户端配置"><a href="#正确的多客户端配置" class="headerlink" title="正确的多客户端配置"></a>正确的多客户端配置</h4><p>内网机器1和内网机器2的配置应该区分如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">内网机器1：</span><br><span class="line">[ssh]                      &lt;==不同点</span><br><span class="line">type = tcp </span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6000         &lt;==不同点</span><br><span class="line"></span><br><span class="line">内网机器2：</span><br><span class="line">[ssh1]                     &lt;==不同点</span><br><span class="line">type = tcp </span><br><span class="line">local_ip = 127.0.0.1</span><br><span class="line">local_port = 22</span><br><span class="line">remote_port = 6001         &lt;==不同点</span><br></pre></td></tr></table></figure>
+<p>在两个内网机器上分别运行 frpc 客户端程序后，一般就可以通过以下的方法 ssh 登录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">内网机器1：</span><br><span class="line">$ ssh -p 6000 user_name1@server_addr</span><br><span class="line"></span><br><span class="line">内网机器2：</span><br><span class="line">$ ssh -p 6001 user_name2@server_addr</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>以上参数中，server_addr是公网服务器的公网ip；user_name1、user_name2 分别是内网机器1、2的用户名，之后分别使用登录密码就可以登录。</p>
+</blockquote>
+<hr>
+<h2 id="connection-timed-out-解决"><a href="#connection-timed-out-解决" class="headerlink" title="connection timed out 解决"></a>connection timed out 解决</h2><p>但是有时候会发现按照以上的配置还是使 frp 的服务端与客户端建立连接，在客户端上会出现以下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2018/09/17 22:02:23 [W] [control.go:113] login to server failed: dial tcp xxx.xxx.xxx.xxx:7000: connect: connection timed out</span><br><span class="line">dial tcp xxx.xxx.xxx.xxx:7000: connect: connection timed out</span><br></pre></td></tr></table></figure>
+<p>仔细检查了一下云服务器上面的防火墙设置，发现并没有任何过滤规则，那应该不是防火墙的问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># iptables -vnL</span><br><span class="line">Chain INPUT (policy ACCEPT 46165 packets, 28M bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination         </span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT 0 packets, 0 bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination         </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT 42223 packets, 3001K bytes)</span><br><span class="line"> pkts bytes target     prot opt in     out     source               destination</span><br></pre></td></tr></table></figure>
+<p>然后又仔细想了一下我以前在做关于 OpenStack 的项目中也碰到了类似的问题，就是创建了云实例，发现无法通过 ssh 来登录，就是因为 OpenStack 有安全组规则相关的设置。</p>
+<blockquote>
+<p>想到了这里就有一种熟悉的感觉，还是原来的配方，hahaha。。。</p>
+</blockquote>
+<p>登录到阿里云对应云服务器的管理控制台，如下找到左上方的本实例安全组：</p>
+<p><img src="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20instance%20info.jpg" alt="aliyun"></p>
+<p>然后点击右上角的配置规则：</p>
+<p><img src="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20group%20rules.jpg" alt=""></p>
+<p>再点击右上角的添加安全组规则：</p>
+<p><img src="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20groups%20rules%20setting.jpg" alt="aliyun"></p>
+<p>最后在添加安全组规则的界面添加相应的规则：</p>
+<p><img src="https://raw.githubusercontent.com/cao0507/My-Pictures-Repository/master/blog/aliyun%20group%20rules%20adding.jpg" alt="阿里云"></p>
+<blockquote>
+<p>主要有两个配置项，端口范围和授权对象</p>
+<ul>
+<li>端口范围就是你要开放的端口的范围，需要将 <code>server_port</code> 和 <code>remote_port</code> 都添加进去，可以分成两条规则分别添加；</li>
+<li>授权对象是你要授权的对象，一般设为 <code>0.0.0.0/0</code>  表示允许所有IP的访问。</li>
+</ul>
+</blockquote>
+<p>以上就是针对阿里云的云服务器的安全组设置，其他厂商如果有安全组规则也应该是类似的。</p>
+<hr>
 
       
     </div>
+    
+    
+    
 
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的阅读，希望您能从中获益! (^_^)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="WooOh 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="WooOh 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    WooOh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://cao0507.github.io/2018/09/18/阿里云服务器实现frp内网穿透/" title="阿里云服务器实现 frp 内网穿透">http://cao0507.github.io/2018/09/18/阿里云服务器实现frp内网穿透/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/SSH/" rel="tag"># SSH</a>
+          
+            <a href="/tags/frp/" rel="tag"># frp</a>
+          
+            <a href="/tags/内网穿透/" rel="tag"># 内网穿透</a>
+          
+            <a href="/tags/aliyun/" rel="tag"># aliyun</a>
+          
+            <a href="/tags/安全组规则/" rel="tag"># 安全组规则</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/09/15/关于SSH的个人总结/" rel="next" title="关于 SSH 的个人总结">
+                <i class="fa fa-chevron-left"></i> 关于 SSH 的个人总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -347,6 +637,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -367,8 +666,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -460,6 +768,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置-ssh-访问内网机器"><span class="nav-number">2.</span> <span class="nav-text">配置 ssh 访问内网机器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#下载"><span class="nav-number">2.0.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置"><span class="nav-number">2.0.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#运行"><span class="nav-number">2.0.3.</span> <span class="nav-text">运行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置多个内网主机"><span class="nav-number">3.</span> <span class="nav-text">配置多个内网主机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误的多客户端配置"><span class="nav-number">3.0.1.</span> <span class="nav-text">错误的多客户端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正确的多客户端配置"><span class="nav-number">3.0.2.</span> <span class="nav-text">正确的多客户端配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#connection-timed-out-解决"><span class="nav-number">4.</span> <span class="nav-text">connection timed out 解决</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -625,6 +949,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
