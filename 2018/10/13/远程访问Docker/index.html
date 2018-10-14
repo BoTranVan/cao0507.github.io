@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="WooOh&#39;s blog">
 <meta property="og:description" content="介绍最近的项目中涉及到监控远程主机上的 Docker 容器的运行状况，即通过本地 docker 客户端访问远程主机的 docker 服务端，以此来监控远程主机上的 Docker 容器。但是 Docker Daemon 默认情况下是只允许本地访问的，不允许远程访问。本文将首先介绍 Docker Daemon 的连接方式，然后说明如何配置远程访问。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-10-13T15:30:40.287Z">
+<meta property="og:updated_time" content="2018-10-13T15:34:45.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="远程访问 Docker Daemon">
 <meta name="twitter:description" content="介绍最近的项目中涉及到监控远程主机上的 Docker 容器的运行状况，即通过本地 docker 客户端访问远程主机的 docker 服务端，以此来监控远程主机上的 Docker 容器。但是 Docker Daemon 默认情况下是只允许本地访问的，不允许远程访问。本文将首先介绍 Docker Daemon 的连接方式，然后说明如何配置远程访问。">
@@ -495,7 +495,7 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; (Not all processes could be identified, non-owned process info</span><br><span class="line">&gt;  will not be shown, you would have to be root to see it all.)</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
 </blockquote>
 <p>在远程主机上面通过 tcp socket 来访问本机的 Docker Daemon 服务：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker -H 192.168.1.130:2375 images</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker -H 192.168.1.130:2375 images</span><br><span class="line"></span><br><span class="line">$ docker -H 192.168.1.130:2375 ps</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>其中 192.168.1.130 是开放了远程访问的主机的 IP。</p>
 <p>另外需要注意的是这种操作是不太安全的，仅用于测试使用。</p>
@@ -801,7 +801,7 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
     <span class="site-uv">
