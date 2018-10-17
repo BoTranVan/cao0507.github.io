@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[107. Binary Tree Level Order Traversal II]]></title>
+    <url>%2F2018%2F10%2F17%2Fleetcode-107%2F</url>
+    <content type="text"><![CDATA[107. Binary Tree Level Order Traversal IIGiven a binary tree, return the bottom-up level order traversal of its nodes’ values. (ie, from left to right, level by level from leaf to root). For example:Given binary tree [3,9,20,null,null,15,7], 12345 3 / \9 20 / \ 15 7 return its bottom-up level order traversal as: 12345[ [15,7], [9,20], [3]] 题意理解给定一个二叉树，要求自底向上，自左向右的按层输出二叉树各节点的值。输出保存在一个二维数组中，也就是一个数组的数组，外层数组的元素是二叉树每一层节点的值的集合。 解法思路解法一：DFS（Depth-First-Search）可以知道的是，输出的二维数组中用一个数组来保存二叉树中的每一层的节点的值，且该内层数组在外层数组中的下标索引刚好与这些节点在树中的高度相反。所以可以利用 DFS 来遍历二叉树，根据节点在树中的高度，找到数组中保存该层元素的内层数组，将节点的值插入，最后只需将整个数组反转即可。对于二叉树的深度优先搜索，可以考虑用递归或者栈来实现。 DFS with recursive： 123456789101112131415161718192021class Solution &#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) &#123; vector&lt;vector&lt;int&gt;&gt; res; levelRecursive(res, root, 0); reverse(res.begin(), res.end()); return res; &#125; void levelRecursive(vector&lt;vector&lt;int&gt;&gt; &amp;res, TreeNode* root, int level)&#123; if (root == NULL) return ; if (res.size() &lt; level+1)&#123; //判断是否已经有内层数组来存放该层节点的值 vector&lt;int&gt; vec; res.push_back(vec); &#125; res[level].push_back(root-&gt;val); levelRecursive(res, root-&gt;left, level+1); levelRecursive(res, root-&gt;right, level+1); &#125;&#125;; DFS with stack： 12345678910111213141516171819202122232425class Solution &#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) &#123; vector&lt;vector&lt;int&gt;&gt; res; if (root == NULL) return res; vector&lt;pair&lt;TreeNode*, int&gt;&gt; stack; //用一个pair来存放节点和节点在书中的深度 stack.push_back(&#123;root, 0&#125;); while (!stack.empty())&#123; pair&lt;TreeNode*, int&gt; p = stack.back(); stack.pop_back(); if (res.size() &lt; p.second + 1)&#123; vector&lt;int&gt; vec; res.push_back(vec); &#125; res[p.second].push_back(p.first-&gt;val); if (p.first-&gt;right != NULL) stack.push_back(&#123;p.first-&gt;right, p.second+1&#125;); if (p.first-&gt;left != NULL) stack.push_back(&#123;p.first-&gt;left, p.second+1&#125;); &#125; reverse(res.begin(), res.end()); return res; &#125;&#125;; 解法二：BFS（Breadth-First-Search）使用队列来存放每一层的节点，在 while 循环中又有一个 for 循环来遍历每一层的元素。 123456789101112131415161718192021222324252627class Solution &#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) &#123; vector&lt;vector&lt;int&gt;&gt; res; queue&lt;TreeNode* &gt; q; if (root == NULL) return res; q.push(root); while (!q.empty())&#123; vector&lt;int&gt; level; int len = q.size(); for (int i = 0; i &lt; len; ++i)&#123; level.push_back(q.front()-&gt;val); TreeNode* p = q.front(); q.pop(); if (p-&gt;left != NULL) q.push(p-&gt;left); if (p-&gt;right != NULL) q.push(p-&gt;right); &#125; res.push_back(level); &#125; reverse(res.begin(), res.end()); return res; &#125;&#125;; 复杂度：以上解法的时间复杂度及空间复杂度都为 O(N)。]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[远程访问 Docker Daemon]]></title>
     <url>%2F2018%2F10%2F13%2F%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AEDocker%2F</url>
     <content type="text"><![CDATA[介绍最近的项目中涉及到监控远程主机上的 Docker 容器的运行状况，即通过本地 docker 客户端访问远程主机的 docker 服务端，以此来监控远程主机上的 Docker 容器。但是 Docker Daemon 默认情况下是只允许本地访问的，不允许远程访问。本文将首先介绍 Docker Daemon 的连接方式，然后说明如何配置远程访问。 Docker Daemon 的连接方式 UNIX 域套接字 默认就是这种方式, 会生成一个 /var/run/docker.sock 文件, UNIX 域套接字用于本地进程之间的通讯, 这种方式相比于网络套接字效率更高, 但局限性就是只能被本地的客户端访问。 tcp 端口监听 服务端开启端口监听 dockerd -H IP:PORT , 客户端通过指定IP和端口访问服务端 docker -H IP:PORT 。通过这种方式, 任何人只要知道了你暴露的ip和端口就能随意访问你的docker服务了, 这是一件很危险的事, 因为docker的权限很高, 不法分子可以从这突破取得服务端宿主机的最高权限。 配置 Docker 远程访问看到一些资料上面说可以通过修改 /etc/default/docker 文件来修改 Docker Daemon 的配置，也就是编辑docker的配置文件 /etc/default/docker 中的 DOCKER_OPTS 选项成同时监听本地 unix socket 和远程 http socket（2375） 1DOCKER_OPTS=&quot;-H unix:///var/run/docker.sock -H tcp://0.0.0.0:2375&quot; 但是通过这种方法修改完成重新启动 docker 守护进程之后，Docker Daemon 并没有在监听 2375 端口。然后发现其实在 /etc/default/docker 文件也有说到： 1234# THIS FILE DOES NOT APPLY TO SYSTEMD## Please see the documentation for &quot;systemd drop-ins&quot;:# https://docs.docker.com/engine/admin/systemd/ 因为 Ubuntu 16.04 使用 systemd 来管理 docker 进程，/etc/default/docker 文件已经不再起作用了，该文件只对更老的系统起作用。正确的配置方式如下： 主要参考该链接：Adjustments to docker setting 1. Changes to default options安装好 Docker 后可能有一些选项需要修改，就像我们这里想要配置 Docker Daemon 允许远程访问一样。有两种方法： 修改 /etc/default/docker 和 /lib/systemd/system/docker.service 文件，但是这种方法对不同版本的 Docker 有不同的配置方法，不推荐。 创建 /etc/docker/daemon.json 来作为配置文件，Docker 推荐使用这种方法，这也是我们接下来介绍的。 注：这里使用的是 Ubuntu 16.04 LTS 系统，使用了 systemd 来管理 docker 进程。而更老版本的 Ubuntu 系统没有使用 systemd，所以只需要修改 /etc/default/docker 文件就够了。 开始之前，先关闭 docker 进程： 1$ sudo service docker stop 注意：在上面的原文链接的方法中，还会修改 docker 的默认目录，也就是将 /var/lib/docker 修改成了 /data/docker ，修改之后我们原来的容器镜像都会找不到的，所以我们就不修改默认目录，还是使用原来的 /var/lib/docker。可以使用以下命令查看 docker 默认目录： 123&gt; $ docker info | grep &quot;Docker Root Dir&quot;&gt; Docker Root Dir: /var/lib/docker&gt; 2. Create/modify files创建 /etc/docker/daemon.json 文件（如果已经存在则修改），加入以下内容： 123&#123; &quot;hosts&quot; : [&quot;unix:///var/run/docker.sock&quot;, &quot;tcp://0.0.0.0:2375&quot;]&#125; &quot;unix:///var/run/docker.sock&quot;：unix socket，本地客户端将通过这个来连接 Docker Daemon。 &quot;tcp://0.0.0.0:2375&quot;：tcp socket，表示允许任何远程客户端通过 2375 端口连接 Docker Daemon。 注意：这里也和原文链接有点不同。 3. Servers using systemd:可以使用 systemctl edit docker 来调用文本编辑器修改指定的单元或单元实例，ubuntu 默认调用的是 nano 编辑器，不是很好用，如果不熟悉 nano 编辑器的操作可以使用 vim 编辑器。 主要也就是新建或修改 /etc/systemd/system/docker.service.d/override.conf，其内容如下： 1234##Add this to the file for the docker daemon to use different ExecStart parameters (more things can be added here)[Service]ExecStart=ExecStart=/usr/bin/dockerd 解释一下： 默认情况下使用 systemd 时，docker.service 的设置为：ExecStart=/usr/bin/dockerd -H fd://，这将覆盖写到 daemon.json 中的任何 hosts 。通过在 override.conf 文件中将 ExecStart 仅仅定义为：ExecStart=/usr/bin/dockerd，这将会使用在 daemon.json 中设置的 hosts 。这个文件中的第一行ExecStart= 必须要有，因为它将用于清楚默认的 ExecStart 参数。如果是修改 docker.service 的文件而不是创建 override.conf，那么下次 systemd 重启时，docker.service 文件也会被重新创建。 重新加载 daemon 并重启 docker 服务： 12$ sudo systemctl daemon-reload$ sudo systemctl restart docker.service 检查端口监听： 12# netstat -ntlp |grep dockerdtcp6 0 0 :::2375 :::* LISTEN 6259/dockerd 如果检查端口监听时出现下面的提示，则说明需要使用 root 权限。 123&gt; (Not all processes could be identified, non-owned process info&gt; will not be shown, you would have to be root to see it all.)&gt; 在远程主机上面通过 tcp socket 来访问本机的 Docker Daemon 服务： 123$ docker -H 192.168.1.130:2375 images$ docker -H 192.168.1.130:2375 ps 其中 192.168.1.130 是开放了远程访问的主机的 IP。 另外需要注意的是这种操作是不太安全的，仅用于测试使用。]]></content>
@@ -121,8 +132,8 @@
         <category>VIM</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>vim</tag>
+        <tag>python</tag>
         <tag>YouCompleteMe</tag>
       </tags>
   </entry>
@@ -147,8 +158,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>centos</tag>
         <tag>shadowsocks</tag>
+        <tag>centos</tag>
         <tag>BBR</tag>
       </tags>
   </entry>
@@ -231,8 +242,8 @@
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>KVM</tag>
         <tag>Openstack</tag>
+        <tag>KVM</tag>
         <tag>云计算</tag>
         <tag>虚拟化</tag>
       </tags>
@@ -246,8 +257,8 @@
       </categories>
       <tags>
         <tag>Openstack</tag>
-        <tag>Mistral</tag>
         <tag>Tacker</tag>
+        <tag>Mistral</tag>
       </tags>
   </entry>
   <entry>
@@ -270,8 +281,8 @@
         <category>KVM</category>
       </categories>
       <tags>
-        <tag>KVM</tag>
         <tag>Openstack</tag>
+        <tag>KVM</tag>
         <tag>vnc</tag>
         <tag>ubuntu</tag>
         <tag>Virtual Machine</tag>
