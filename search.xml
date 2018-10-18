@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[110. Balanced Binary Tree]]></title>
+    <url>%2F2018%2F10%2F18%2Fleetcode-110%2F</url>
+    <content type="text"><![CDATA[110. Balanced Binary TreeGiven a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 12345 3 / \9 20 / \ 15 7 Return true.Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1234567 1 / \ 2 2 / \ 3 3 / \4 4 Return false. 题意理解 给定一个二叉树（是任意二叉树，而不是二叉搜索树），判断其是否是高度平衡的。高度平衡二叉树的定义就是： 对于二叉树的每一个节点，其左右子树的高度相差最大不超过 1 。 根据上面的定义，简单地认为只需要根节点的左右子树的高度相差不超过 1 是错误的，必须保证每一个节点都满足该条件。 解法思路 初始思路： 按照高度平衡二叉树的定义，可以想到通过遍历每一个节点，然后求每个节点的左右子树的高度，最后比较左右子树的高度差是否大于 1，当高度差大于时则返回 false，否则返回 true。实现如下： 123456789101112131415161718class Solution &#123;public: int getHeight(TreeNode* root) &#123; if (root == NULL) return 0; else return 1 + max(getHeight(root-&gt;left), getHeight(root-&gt;right)); &#125; bool isBalanced(TreeNode* root) &#123; if (root == NULL) return true; int left = getHeight(root-&gt;left); int right = getHeight(root-&gt;right); return abs(left - right) &lt;= 1 &amp;&amp; isBalanced(root-&gt;left) &amp;&amp; isBalanced(root-&gt;right); &#125;&#125;; 复杂度分析：求个节点的高度调用 getHeight() 花费的时间复杂度是 O(N)，遍历所有节点又需要 O(N)，因此总的时间复杂度是 O(N^2)。 改进思路： 对于上面的方法，是从根往下，在求每一个节点的高度时都会遍历其子节点，这些操作有很多时重复的。如果可以每个节点的高度都保存下来就好了。对于这个题目，节点的值是没有用的，因此可以用节点的值来存放其高度，这样就没有额外的空间消耗。 代码如下： 12345678910111213141516171819202122232425262728293031class Solution &#123;public: void storeHeight(TreeNode* root) &#123; if (root == NULL) return ; storeHeight(root-&gt;left); storeHeight(root-&gt;right); if (root-&gt;left != NULL &amp;&amp; root-&gt;right != NULL) root-&gt;val = 1 + max(root-&gt;left-&gt;val, root-&gt;right-&gt;val); else if (root-&gt;left != NULL) root-&gt;val = 1 + root-&gt;left-&gt;val; else if (root-&gt;right != NULL) root-&gt;val =1+root-&gt;right-&gt;val; else root-&gt;val = 1; &#125; bool helper(TreeNode* root) &#123; if (root == NULL) return true; int left = root-&gt;left == NULL? 0 : root-&gt;left-&gt;val; int right = root-&gt;right == NULL? 0 : root-&gt;right-&gt;val; return abs(left - right) &lt;= 1 &amp;&amp; helper(root-&gt;left) &amp;&amp; helper(root-&gt;right); &#125; bool isBalanced(TreeNode* root) &#123; storeHeight(root); return helper(root); &#125;&#125;; 复杂度分析：算法首先求出二叉树各节点的高度，时间复杂度为 O(N)；然后再递归的计算每个节点左右子树的高度差是否小于等于 1，时间复杂度也为 O(N)。所以总的时间复杂度为 O(N) + O(N) = O(N)。 最终解法： 在递归的计算二叉树中每个节点的高度时，如果两个子树的高度相差小于等于 1，则记录该节点真实的高度值，否则记录为 -1；并且在递归求某节点的高度时判断其左右孩子的高度值是否记录的是 -1，如果是，说明其左右子树中有非平衡树，则将该节点的高度值记为 -1。最后判断根节点的高度值是否为 -1，若为 -1，说明该二叉树不是高度平衡的；若不为 -1，说明该二叉树是高度平衡的。 代码如下： 123456789101112131415161718192021222324class Solution &#123;public: int dfsHeight(TreeNode* root)&#123; if (root == NULL) return 0; int left = dfsHeight(root-&gt;left); if (left == -1) return -1; int right = dfsHeight(root-&gt;right); if (right == -1) return -1; if (abs(left - right) &gt; 1) return -1; return 1 + max(left, right); &#125; bool isBalanced(TreeNode* root) &#123; if (dfsHeight(root) == -1) return false; else return true; &#125;&#125;; 复杂度分析：只需要遍历一遍所有节点即可，时间复杂度为 O(N)。]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[107. Binary Tree Level Order Traversal II]]></title>
     <url>%2F2018%2F10%2F17%2Fleetcode-107%2F</url>
     <content type="text"><![CDATA[107. Binary Tree Level Order Traversal IIGiven a binary tree, return the bottom-up level order traversal of its nodes’ values. (ie, from left to right, level by level from leaf to root). For example:Given binary tree [3,9,20,null,null,15,7], 12345 3 / \9 20 / \ 15 7 return its bottom-up level order traversal as: 12345[ [15,7], [9,20], [3]] 题意理解给定一个二叉树，要求自底向上，自左向右的按层输出二叉树各节点的值。输出保存在一个二维数组中，也就是一个数组的数组，外层数组的元素是二叉树每一层节点的值的集合。 解法思路解法一：DFS（Depth-First-Search）可以知道的是，输出的二维数组中用一个数组来保存二叉树中的每一层的节点的值，且该内层数组在外层数组中的下标索引刚好与这些节点在树中的高度相反。所以可以利用 DFS 来遍历二叉树，根据节点在树中的高度，找到数组中保存该层元素的内层数组，将节点的值插入，最后只需将整个数组反转即可。对于二叉树的深度优先搜索，可以考虑用递归或者栈来实现。 DFS with recursive： 123456789101112131415161718192021class Solution &#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) &#123; vector&lt;vector&lt;int&gt;&gt; res; levelRecursive(res, root, 0); reverse(res.begin(), res.end()); return res; &#125; void levelRecursive(vector&lt;vector&lt;int&gt;&gt; &amp;res, TreeNode* root, int level)&#123; if (root == NULL) return ; if (res.size() &lt; level+1)&#123; //判断是否已经有内层数组来存放该层节点的值 vector&lt;int&gt; vec; res.push_back(vec); &#125; res[level].push_back(root-&gt;val); levelRecursive(res, root-&gt;left, level+1); levelRecursive(res, root-&gt;right, level+1); &#125;&#125;; DFS with stack： 12345678910111213141516171819202122232425class Solution &#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) &#123; vector&lt;vector&lt;int&gt;&gt; res; if (root == NULL) return res; vector&lt;pair&lt;TreeNode*, int&gt;&gt; stack; //用一个pair来存放节点和节点在书中的深度 stack.push_back(&#123;root, 0&#125;); while (!stack.empty())&#123; pair&lt;TreeNode*, int&gt; p = stack.back(); stack.pop_back(); if (res.size() &lt; p.second + 1)&#123; vector&lt;int&gt; vec; res.push_back(vec); &#125; res[p.second].push_back(p.first-&gt;val); if (p.first-&gt;right != NULL) stack.push_back(&#123;p.first-&gt;right, p.second+1&#125;); if (p.first-&gt;left != NULL) stack.push_back(&#123;p.first-&gt;left, p.second+1&#125;); &#125; reverse(res.begin(), res.end()); return res; &#125;&#125;; 解法二：BFS（Breadth-First-Search）使用队列来存放每一层的节点，在 while 循环中又有一个 for 循环来遍历每一层的元素。 123456789101112131415161718192021222324252627class Solution &#123;public: vector&lt;vector&lt;int&gt;&gt; levelOrderBottom(TreeNode* root) &#123; vector&lt;vector&lt;int&gt;&gt; res; queue&lt;TreeNode* &gt; q; if (root == NULL) return res; q.push(root); while (!q.empty())&#123; vector&lt;int&gt; level; int len = q.size(); for (int i = 0; i &lt; len; ++i)&#123; level.push_back(q.front()-&gt;val); TreeNode* p = q.front(); q.pop(); if (p-&gt;left != NULL) q.push(p-&gt;left); if (p-&gt;right != NULL) q.push(p-&gt;right); &#125; res.push_back(level); &#125; reverse(res.begin(), res.end()); return res; &#125;&#125;; 复杂度：以上解法的时间复杂度及空间复杂度都为 O(N)。]]></content>
@@ -132,8 +143,8 @@
         <category>VIM</category>
       </categories>
       <tags>
-        <tag>vim</tag>
         <tag>python</tag>
+        <tag>vim</tag>
         <tag>YouCompleteMe</tag>
       </tags>
   </entry>
@@ -158,8 +169,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>shadowsocks</tag>
         <tag>centos</tag>
+        <tag>shadowsocks</tag>
         <tag>BBR</tag>
       </tags>
   </entry>
@@ -257,8 +268,8 @@
       </categories>
       <tags>
         <tag>Openstack</tag>
-        <tag>Tacker</tag>
         <tag>Mistral</tag>
+        <tag>Tacker</tag>
       </tags>
   </entry>
   <entry>
