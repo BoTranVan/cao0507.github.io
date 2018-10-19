@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[KVM 从虚拟机磁盘镜像创建虚拟机]]></title>
+    <url>%2F2018%2F10%2F19%2F%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%2F</url>
+    <content type="text"><![CDATA[概述作为教研室的网管，干了很多运维的工作，而一个高效的运维是必须少做重复性工作。教研室的网管做的最多的事就是在很多服务器上给很多同学分配很多虚拟机，由于同学们没法直接操作服务器，所以有时系统也是需要网管帮忙安装的，而安装系统的过程费时费力且没啥技术含量。所以最好的办法给各种系统保存一份模板镜像，如果同学需要一个虚拟机就给他复制一份，然后从镜像启动虚拟机，无需重复系统安装的过程，一人一个文件夹，方便管理。本文就将介绍如何在 KVM 环境下从磁盘镜像创建虚拟机。 实现过程这里假设保存的磁盘镜像格式为 qcow2 格式的，操作系统为 Linux ，并且后面的操作的磁盘名称为：ubuntu.qcow2。 命令行实现：在命令行下，使用 virt-install 命令来安装虚拟机，这命令有很多选项，这里不详细介绍，可以通过 man virt-install 仔细查看。我们通常安装虚拟机都是通过系统 ISO 文件来安装系统，使用的命令如下： 123456virt-install --virt-type kvm --name ubuntu --ram 4096 --vcpus=4 \ --cdrom=/home/kb310/test/ubuntu-16.04.4-desktop-amd64.iso \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network network=br0,model=virtio \ --graphics vnc,listen=0.0.0.0, --noautoconsole \ --os-type=linux 但是以上方法每次都是重新安装系统，太麻烦。 下面介绍从虚拟机磁盘文件创建虚拟机的命令，但是这和 virt-instal 工具的版本有关系（可能和KVM的版本也有关系），不同版本的选项略微有差别，使用如下命令查看版本： 12345678$ virt-install --version1.3.2 或 0.600.4 （我只接触过这两个版本）$ kvm -versionQEMU emulator version 2.5.0 (Debian 1:2.5+dfsg-5ubuntu10.30), Copyright (c) 2003-2008 Fabrice Bellard或# kvm -versionQEMU emulator version 2.0.0 (Debian 2.0.0+dfsg-2ubuntu1.33), Copyright (c) 2003-2008 Fabrice Bellard 一种兼容前后版本的命令如下： 123456virt-install --virt-type kvm --name ubuntu --ram 4096 --vcpus=4 \ --import \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network bridge=br0,model=virtio \ --graphics vnc,listen=0.0.0.0 --noautoconsole \ --os-type=linux 只适用于新版本的命令如下： 123456virt-install --virt-type kvm --name docker-$1 --ram 4096 --vcpus=4 \ --cdrom=/home/kb310/test/ubuntu.qcow2 \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network bridge=br0,model=virtio \ --graphics vnc,listen=0.0.0.0 --noautoconsole \ --os-type=linux 主要的区别就在于 –import 选项是兼容的，而使用 –cdrom 只适用于新版本。 图形界面实现：对于图形界面就是通过 virt-manager 来实现，但是这种方法貌似只适用于较新版本KVM环境，步骤如下： 打开 virtual machine mananger，-&gt; 点击右上角新建虚拟机 选择 Import existing disk image，-&gt; Forward 点击 Browse 点击 Browse Local，找到虚拟机磁盘镜像文件，-&gt;Choose Volume 点击 Forward 配置合适的内存和 CPU 个数，-&gt; Forward 给虚拟机命名（但注意这不是虚拟机里面的 hostname），-&gt; Finish 最后就会进入虚拟机的系统启动过程 遇到的问题由于教研室有一些服务器的使用年限较长，有一些服务器的系统和软件版本较低，在使用 KVM 时碰到一些很烦人的问题，所以才写下这篇博客记录一下。如果在旧版本的环境下使用新环境才支持的命令选项，就可能会出现一些问题，如： 1234567891011121314$ virt-install --virt-type kvm --name docker-$1 --ram 4096 --vcpus=4 \ --cdrom=/home/kb310/test/ubuntu.qcow2 \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network bridge=br0,model=virtio \ --graphics vnc,listen=0.0.0.0 --noautoconsole \ --os-type=linuxStarting install...ERROR internal error: process exited while connecting to monitor: qemu-system-x86_64: -drive file=/home/kb310/test/ubuntu.qcow2,if=none,id=drive-ide0-0-0,format=qcow2: could not open disk image /home/kb310/test/ubuntu.qcow2: Could not open &apos;/home/kb310/test/ubuntu.qcow2&apos;: Permission deniedDomain installation does not appear to have been successful.If it was, you can restart your domain by running: virsh --connect qemu:///system start hghotherwise, please restart your installation. 上面出现的错误就是由于软件版本的不同导致的，所以最好使用兼容的命令选项。]]></content>
+      <categories>
+        <category>KVM</category>
+      </categories>
+      <tags>
+        <tag>KVM</tag>
+        <tag>virt-install</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[110. Balanced Binary Tree]]></title>
     <url>%2F2018%2F10%2F18%2Fleetcode-110%2F</url>
     <content type="text"><![CDATA[110. Balanced Binary TreeGiven a binary tree, determine if it is height-balanced. For this problem, a height-balanced binary tree is defined as: a binary tree in which the depth of the two subtrees of every node never differ by more than 1. Example 1: Given the following tree [3,9,20,null,null,15,7]: 12345 3 / \9 20 / \ 15 7 Return true.Example 2: Given the following tree [1,2,2,3,3,null,null,4,4]: 1234567 1 / \ 2 2 / \ 3 3 / \4 4 Return false. 题意理解 给定一个二叉树（是任意二叉树，而不是二叉搜索树），判断其是否是高度平衡的。高度平衡二叉树的定义就是： 对于二叉树的每一个节点，其左右子树的高度相差最大不超过 1 。 根据上面的定义，简单地认为只需要根节点的左右子树的高度相差不超过 1 是错误的，必须保证每一个节点都满足该条件。 解法思路 初始思路： 按照高度平衡二叉树的定义，可以想到通过遍历每一个节点，然后求每个节点的左右子树的高度，最后比较左右子树的高度差是否大于 1，当高度差大于时则返回 false，否则返回 true。实现如下： 123456789101112131415161718class Solution &#123;public: int getHeight(TreeNode* root) &#123; if (root == NULL) return 0; else return 1 + max(getHeight(root-&gt;left), getHeight(root-&gt;right)); &#125; bool isBalanced(TreeNode* root) &#123; if (root == NULL) return true; int left = getHeight(root-&gt;left); int right = getHeight(root-&gt;right); return abs(left - right) &lt;= 1 &amp;&amp; isBalanced(root-&gt;left) &amp;&amp; isBalanced(root-&gt;right); &#125;&#125;; 复杂度分析：求个节点的高度调用 getHeight() 花费的时间复杂度是 O(N)，遍历所有节点又需要 O(N)，因此总的时间复杂度是 O(N^2)。 改进思路： 对于上面的方法，是从根往下，在求每一个节点的高度时都会遍历其子节点，这些操作有很多时重复的。如果可以每个节点的高度都保存下来就好了。对于这个题目，节点的值是没有用的，因此可以用节点的值来存放其高度，这样就没有额外的空间消耗。 代码如下： 12345678910111213141516171819202122232425262728293031class Solution &#123;public: void storeHeight(TreeNode* root) &#123; if (root == NULL) return ; storeHeight(root-&gt;left); storeHeight(root-&gt;right); if (root-&gt;left != NULL &amp;&amp; root-&gt;right != NULL) root-&gt;val = 1 + max(root-&gt;left-&gt;val, root-&gt;right-&gt;val); else if (root-&gt;left != NULL) root-&gt;val = 1 + root-&gt;left-&gt;val; else if (root-&gt;right != NULL) root-&gt;val =1+root-&gt;right-&gt;val; else root-&gt;val = 1; &#125; bool helper(TreeNode* root) &#123; if (root == NULL) return true; int left = root-&gt;left == NULL? 0 : root-&gt;left-&gt;val; int right = root-&gt;right == NULL? 0 : root-&gt;right-&gt;val; return abs(left - right) &lt;= 1 &amp;&amp; helper(root-&gt;left) &amp;&amp; helper(root-&gt;right); &#125; bool isBalanced(TreeNode* root) &#123; storeHeight(root); return helper(root); &#125;&#125;; 复杂度分析：算法首先求出二叉树各节点的高度，时间复杂度为 O(N)；然后再递归的计算每个节点左右子树的高度差是否小于等于 1，时间复杂度也为 O(N)。所以总的时间复杂度为 O(N) + O(N) = O(N)。 最终解法： 在递归的计算二叉树中每个节点的高度时，如果两个子树的高度相差小于等于 1，则记录该节点真实的高度值，否则记录为 -1；并且在递归求某节点的高度时判断其左右孩子的高度值是否记录的是 -1，如果是，说明其左右子树中有非平衡树，则将该节点的高度值记为 -1。最后判断根节点的高度值是否为 -1，若为 -1，说明该二叉树不是高度平衡的；若不为 -1，说明该二叉树是高度平衡的。 代码如下： 123456789101112131415161718192021222324class Solution &#123;public: int dfsHeight(TreeNode* root)&#123; if (root == NULL) return 0; int left = dfsHeight(root-&gt;left); if (left == -1) return -1; int right = dfsHeight(root-&gt;right); if (right == -1) return -1; if (abs(left - right) &gt; 1) return -1; return 1 + max(left, right); &#125; bool isBalanced(TreeNode* root) &#123; if (dfsHeight(root) == -1) return false; else return true; &#125;&#125;; 复杂度分析：只需要遍历一遍所有节点即可，时间复杂度为 O(N)。]]></content>
@@ -156,8 +168,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>ubuntu</tag>
         <tag>shadowsocks</tag>
+        <tag>ubuntu</tag>
         <tag>privoxy</tag>
       </tags>
   </entry>
@@ -254,9 +266,9 @@
       </categories>
       <tags>
         <tag>Openstack</tag>
-        <tag>KVM</tag>
         <tag>云计算</tag>
         <tag>虚拟化</tag>
+        <tag>KVM</tag>
       </tags>
   </entry>
   <entry>
@@ -294,8 +306,8 @@
       <tags>
         <tag>Openstack</tag>
         <tag>KVM</tag>
-        <tag>vnc</tag>
         <tag>ubuntu</tag>
+        <tag>vnc</tag>
         <tag>Virtual Machine</tag>
       </tags>
   </entry>

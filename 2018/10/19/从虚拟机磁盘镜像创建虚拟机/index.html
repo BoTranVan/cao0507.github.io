@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="KVM,virt-install," />
 
 
 
@@ -80,17 +80,26 @@
 
 
 
-<meta name="description" content="学着去分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="http://cao0507.github.io/categories/index.html">
+<meta name="description" content="概述作为教研室的网管，干了很多运维的工作，而一个高效的运维是必须少做重复性工作。教研室的网管做的最多的事就是在很多服务器上给很多同学分配很多虚拟机，由于同学们没法直接操作服务器，所以有时系统也是需要网管帮忙安装的，而安装系统的过程费时费力且没啥技术含量。所以最好的办法给各种系统保存一份模板镜像，如果同学需要一个虚拟机就给他复制一份，然后从镜像启动虚拟机，无需重复系统安装的过程，一人一个文件夹，方便">
+<meta name="keywords" content="KVM,virt-install">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KVM 从虚拟机磁盘镜像创建虚拟机">
+<meta property="og:url" content="http://cao0507.github.io/2018/10/19/从虚拟机磁盘镜像创建虚拟机/index.html">
 <meta property="og:site_name" content="WooOh&#39;s blog">
-<meta property="og:description" content="学着去分享">
+<meta property="og:description" content="概述作为教研室的网管，干了很多运维的工作，而一个高效的运维是必须少做重复性工作。教研室的网管做的最多的事就是在很多服务器上给很多同学分配很多虚拟机，由于同学们没法直接操作服务器，所以有时系统也是需要网管帮忙安装的，而安装系统的过程费时费力且没啥技术含量。所以最好的办法给各种系统保存一份模板镜像，如果同学需要一个虚拟机就给他复制一份，然后从镜像启动虚拟机，无需重复系统安装的过程，一人一个文件夹，方便">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-02T01:18:13.612Z">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%201.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%202.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%203.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%204.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%205.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%206.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%207.png?raw=true">
+<meta property="og:updated_time" content="2018-10-19T13:43:05.422Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="学着去分享">
+<meta name="twitter:title" content="KVM 从虚拟机磁盘镜像创建虚拟机">
+<meta name="twitter:description" content="概述作为教研室的网管，干了很多运维的工作，而一个高效的运维是必须少做重复性工作。教研室的网管做的最多的事就是在很多服务器上给很多同学分配很多虚拟机，由于同学们没法直接操作服务器，所以有时系统也是需要网管帮忙安装的，而安装系统的过程费时费力且没啥技术含量。所以最好的办法给各种系统保存一份模板镜像，如果同学需要一个虚拟机就给他复制一份，然后从镜像启动虚拟机，无需重复系统安装的过程，一人一个文件夹，方便">
+<meta name="twitter:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%201.png?raw=true">
 
 
 
@@ -120,13 +129,13 @@
 
 
 
-  <link rel="canonical" href="http://cao0507.github.io/categories/"/>
+  <link rel="canonical" href="http://cao0507.github.io/2018/10/19/从虚拟机磁盘镜像创建虚拟机/"/>
 
 
 
 
 
-  <title>categories | WooOh's blog</title>
+  <title>KVM 从虚拟机磁盘镜像创建虚拟机 | WooOh's blog</title>
   
 
 
@@ -295,40 +304,300 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2018/10/19/从虚拟机磁盘镜像创建虚拟机/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WooOh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WooOh's blog">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">categories</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                目前共计 11 个分类
+          <h1 class="post-title" itemprop="name headline">KVM 从虚拟机磁盘镜像创建虚拟机</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-19T21:39:54+08:00">
+                2018-10-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/KVM/" itemprop="url" rel="index">
+                    <span itemprop="name">KVM</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
+              
+                <a href="/2018/10/19/从虚拟机磁盘镜像创建虚拟机/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/10/19/从虚拟机磁盘镜像创建虚拟机/" itemprop="commentsCount"></span>
+                </a>
+              
+            
+          
+
+          
+          
+             <span id="/2018/10/19/从虚拟机磁盘镜像创建虚拟机/" class="leancloud_visitors" data-flag-title="KVM 从虚拟机磁盘镜像创建虚拟机">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 mins
+                </span>
+              
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Docker/">Docker</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/KVM/">KVM</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/LeetCode/">LeetCode</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Openstack/">Openstack</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Shell/">Shell</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/VIM/">VIM</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/VPN/">VPN</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/云计算/">云计算</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/区块链/">区块链</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/运维/">运维</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>作为教研室的网管，干了很多运维的工作，而一个高效的运维是必须少做重复性工作。教研室的网管做的最多的事就是在很多服务器上给很多同学分配很多虚拟机，由于同学们没法直接操作服务器，所以有时系统也是需要网管帮忙安装的，而安装系统的过程费时费力且没啥技术含量。所以最好的办法给各种系统保存一份模板镜像，如果同学需要一个虚拟机就给他复制一份，然后从镜像启动虚拟机，无需重复系统安装的过程，一人一个文件夹，方便管理。本文就将介绍如何在 KVM 环境下从磁盘镜像创建虚拟机。</p>
+<a id="more"></a>
+<hr>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><p>这里假设保存的磁盘镜像格式为 qcow2 格式的，操作系统为 Linux ，并且后面的操作的磁盘名称为：ubuntu.qcow2。</p>
+<h4 id="命令行实现："><a href="#命令行实现：" class="headerlink" title="命令行实现："></a>命令行实现：</h4><p>在命令行下，使用 virt-install 命令来安装虚拟机，这命令有很多选项，这里不详细介绍，可以通过 <code>man virt-install</code> 仔细查看。我们通常安装虚拟机都是通过系统 ISO 文件来安装系统，使用的命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">virt-install --virt-type kvm --name ubuntu --ram 4096 --vcpus=4 \</span><br><span class="line">    --cdrom=/home/kb310/test/ubuntu-16.04.4-desktop-amd64.iso \</span><br><span class="line">    --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \</span><br><span class="line">    --network network=br0,model=virtio \</span><br><span class="line">    --graphics vnc,listen=0.0.0.0, --noautoconsole \</span><br><span class="line">    --os-type=linux</span><br></pre></td></tr></table></figure>
+<p>但是以上方法每次都是重新安装系统，太麻烦。</p>
+<p><strong>下面介绍从虚拟机磁盘文件创建虚拟机的命令</strong>，但是这和 virt-instal 工具的版本有关系（可能和KVM的版本也有关系），不同版本的选项略微有差别，使用如下命令查看版本：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ virt-install --version</span><br><span class="line">1.3.2  或  0.600.4 （我只接触过这两个版本）</span><br><span class="line"></span><br><span class="line">$ kvm -version</span><br><span class="line">QEMU emulator version 2.5.0 (Debian 1:2.5+dfsg-5ubuntu10.30), Copyright (c) 2003-2008 Fabrice Bellard</span><br><span class="line">或</span><br><span class="line"># kvm -version</span><br><span class="line">QEMU emulator version 2.0.0 (Debian 2.0.0+dfsg-2ubuntu1.33), Copyright (c) 2003-2008 Fabrice Bellard</span><br></pre></td></tr></table></figure>
+<p><strong>一种兼容前后版本的命令如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">virt-install --virt-type kvm --name ubuntu --ram 4096 --vcpus=4 \</span><br><span class="line">	--import \</span><br><span class="line">	--disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \</span><br><span class="line">	--network bridge=br0,model=virtio \</span><br><span class="line">	--graphics vnc,listen=0.0.0.0 --noautoconsole \</span><br><span class="line">	--os-type=linux</span><br></pre></td></tr></table></figure>
+<p><strong>只适用于新版本的命令如下：</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">virt-install --virt-type kvm --name docker-$1 --ram 4096 --vcpus=4 \</span><br><span class="line">	--cdrom=/home/kb310/test/ubuntu.qcow2 \</span><br><span class="line">	--disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \</span><br><span class="line">	--network bridge=br0,model=virtio \</span><br><span class="line">	--graphics vnc,listen=0.0.0.0 --noautoconsole \</span><br><span class="line">	--os-type=linux</span><br></pre></td></tr></table></figure>
+<p>主要的区别就在于 –import 选项是兼容的，而使用 –cdrom 只适用于新版本。</p>
+<hr>
+<h4 id="图形界面实现："><a href="#图形界面实现：" class="headerlink" title="图形界面实现："></a>图形界面实现：</h4><p>对于图形界面就是通过 virt-manager 来实现，但是这种方法貌似只适用于较新版本KVM环境，步骤如下：</p>
+<ol>
+<li><p>打开 virtual machine mananger，-&gt; 点击右上角新建虚拟机</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%201.png?raw=true" alt=""></p>
+</li>
+<li><p>选择 Import existing disk image，-&gt; Forward</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%202.png?raw=true" alt=""></p>
+</li>
+<li><p>点击 Browse</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%203.png?raw=true" alt=""></p>
+</li>
+<li><p>点击 Browse Local，找到虚拟机磁盘镜像文件，-&gt;Choose Volume</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%204.png?raw=true" alt=""></p>
+</li>
+<li><p>点击 Forward</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%205.png?raw=true" alt=""></p>
+</li>
+<li><p>配置合适的内存和 CPU 个数，-&gt; Forward</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%206.png?raw=true" alt=""></p>
+</li>
+<li><p>给虚拟机命名（但注意这不是虚拟机里面的 hostname），-&gt; Finish</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/blog/kvm/virt-manager%207.png?raw=true" alt=""></p>
+</li>
+<li><p>最后就会进入虚拟机的系统启动过程</p>
+</li>
+</ol>
+<hr>
+<h2 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a>遇到的问题</h2><p>由于教研室有一些服务器的使用年限较长，有一些服务器的系统和软件版本较低，在使用 KVM 时碰到一些很烦人的问题，所以才写下这篇博客记录一下。如果在旧版本的环境下使用新环境才支持的命令选项，就可能会出现一些问题，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$ virt-install --virt-type kvm --name docker-$1 --ram 4096 --vcpus=4 \</span><br><span class="line">	--cdrom=/home/kb310/test/ubuntu.qcow2 \</span><br><span class="line">	--disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \</span><br><span class="line">	--network bridge=br0,model=virtio \</span><br><span class="line">	--graphics vnc,listen=0.0.0.0 --noautoconsole \</span><br><span class="line">	--os-type=linux</span><br><span class="line"></span><br><span class="line">Starting install...</span><br><span class="line">ERROR    internal error: process exited while connecting to monitor: qemu-system-x86_64: -drive file=/home/kb310/test/ubuntu.qcow2,if=none,id=drive-ide0-0-0,format=qcow2: could not open disk image /home/kb310/test/ubuntu.qcow2: Could not open &apos;/home/kb310/test/ubuntu.qcow2&apos;: Permission denied</span><br><span class="line"></span><br><span class="line">Domain installation does not appear to have been successful.</span><br><span class="line">If it was, you can restart your domain by running:</span><br><span class="line">  virsh --connect qemu:///system start hgh</span><br><span class="line">otherwise, please restart your installation.</span><br></pre></td></tr></table></figure>
+<p>上面出现的错误就是由于软件版本的不同导致的，所以最好使用兼容的命令选项。</p>
+<hr>
+
       
     </div>
     
     
     
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的阅读，希望您能从中获益! (^_^)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="WooOh 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="WooOh 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    WooOh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://cao0507.github.io/2018/10/19/从虚拟机磁盘镜像创建虚拟机/" title="KVM 从虚拟机磁盘镜像创建虚拟机">http://cao0507.github.io/2018/10/19/从虚拟机磁盘镜像创建虚拟机/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/KVM/" rel="tag"># KVM</a>
+          
+            <a href="/tags/virt-install/" rel="tag"># virt-install</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/18/leetcode-110/" rel="next" title="110. Balanced Binary Tree">
+                <i class="fa fa-chevron-left"></i> 110. Balanced Binary Tree
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -366,8 +635,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -459,6 +737,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#命令行实现："><span class="nav-number">2.0.1.</span> <span class="nav-text">命令行实现：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图形界面实现："><span class="nav-number">2.0.2.</span> <span class="nav-text">图形界面实现：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的问题"><span class="nav-number">3.</span> <span class="nav-text">遇到的问题</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
