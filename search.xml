@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[leetcode-141-142]]></title>
+    <url>%2F2018%2F10%2F21%2Fleetcode-141-142%2F</url>
+    <content type="text"><![CDATA[141. Linked List CycleGiven a linked list, determine if it has a cycle in it. Follow up:Can you solve it without using extra space? 题意理解给定一个链表，判断链表中是否有环。不要有额外的空间消耗。 解法思路双指针法： 最常用的方法，快慢指针，慢指针每次移动一步，快指针一次移动两步。如果链表中没有环，那么快指针将先到达链表结尾，并且指向 NULL；如果链表中有环，则快指针会在环中循环，直到慢指针进入环中，快指针将会追上慢指针，两者相等。 代码如下： 12345678910111213141516class Solution &#123;public: bool hasCycle(ListNode *head) &#123; if (head == NULL || head-&gt;next == NULL) return false; ListNode* slow = head; ListNode* fast = head-&gt;next; while(fast-&gt;next != NULL &amp;&amp; fast-&gt;next-&gt;next != NULL) &#123; if (slow == fast) return true; slow = slow-&gt;next; fast = fast-&gt;next-&gt;next; &#125; return false; &#125;&#125;; 复杂度分析 时间复杂度：O(N)。如果链表中无环，则在快指针到达链表结尾时经过 N/2 步左右，所以复杂度为 O(N)；如果链表中有环，则最坏情况下，当慢指针几乎绕环一圈时快指针才追上它，所以是 N 步左右，所以复杂度为 O(N)。综上，时间复杂度为 O(N)。 空间复杂度：O(1)。只使用了两个指针。 142. Linked List Cycle IIGiven a linked list, return the node where the cycle begins. If there is no cycle, return null. Note: Do not modify the linked list. Follow up:Can you solve it without using extra space? 题意理解给定一个链表，如果链表中有环，返回环开始的节点；如果没有环，则返回 null。并且不能修改这个链表。 解法思路和上面那题一样，都是使用双指针法，但是要输出环开始的节点需要一些其他的计算。 假设经过 k 步，快慢指针相遇；假设环的长度是 r；所以有：2k - k = nr，即 k = nr （其中n表示快指针在环中循环的次数）。 假设链表表头到环的起点的距离为 s；假设环的起点到快慢指针相遇的节点的距离为 m；所以有：s = k - m。 s = nr - m = (n - 1) + (r - m)，n = 1,2,3,... 所以，可以再使用两个指针，慢指针从链表表头开始，每次移动一步；快指针从快慢指针相遇的节点开始，每次也移动一步，那么经过 s 步之后，快慢指针将会在环的起点相遇。 代码如下： 123456789101112131415161718192021222324class Solution &#123;public: ListNode *detectCycle(ListNode *head) &#123; if (head == NULL || head-&gt;next == NULL) return NULL; ListNode* slow = head; ListNode* fast = head; while (fast != NULL &amp;&amp;fast-&gt;next != NULL)&#123; slow = slow-&gt;next; fast = fast-&gt;next-&gt;next; if (slow == fast)&#123; slow = head; fast = fast; while (slow != fast)&#123; slow = slow-&gt;next; fast = fast-&gt;next; &#125; return slow; &#125; &#125; return NULL; &#125;&#125;; 复杂度和上一题一样，都为 O(N).]]></content>
+      <categories>
+        <category>LeetCode</category>
+      </categories>
+      <tags>
+        <tag>LeetCode</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[KVM 从虚拟机磁盘镜像创建虚拟机]]></title>
     <url>%2F2018%2F10%2F19%2F%E4%BB%8E%E8%99%9A%E6%8B%9F%E6%9C%BA%E7%A3%81%E7%9B%98%E9%95%9C%E5%83%8F%E5%88%9B%E5%BB%BA%E8%99%9A%E6%8B%9F%E6%9C%BA%2F</url>
     <content type="text"><![CDATA[概述作为教研室的网管，干了很多运维的工作，而一个高效的运维是必须少做重复性工作。教研室的网管做的最多的事就是在很多服务器上给很多同学分配很多虚拟机，由于同学们没法直接操作服务器，所以有时系统也是需要网管帮忙安装的，而安装系统的过程费时费力且没啥技术含量。所以最好的办法给各种系统保存一份模板镜像，如果同学需要一个虚拟机就给他复制一份，然后从镜像启动虚拟机，无需重复系统安装的过程，一人一个文件夹，方便管理。本文就将介绍如何在 KVM 环境下从磁盘镜像创建虚拟机。 实现过程这里假设保存的磁盘镜像格式为 qcow2 格式的，操作系统为 Linux ，并且后面的操作的磁盘名称为：ubuntu.qcow2。 命令行实现：在命令行下，使用 virt-install 命令来安装虚拟机，这命令有很多选项，这里不详细介绍，可以通过 man virt-install 仔细查看。我们通常安装虚拟机都是通过系统 ISO 文件来安装系统，使用的命令如下： 123456virt-install --virt-type kvm --name ubuntu --ram 4096 --vcpus=4 \ --cdrom=/home/kb310/test/ubuntu-16.04.4-desktop-amd64.iso \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network network=br0,model=virtio \ --graphics vnc,listen=0.0.0.0, --noautoconsole \ --os-type=linux 但是以上方法每次都是重新安装系统，太麻烦。 下面介绍从虚拟机磁盘文件创建虚拟机的命令，但是这和 virt-instal 工具的版本有关系（可能和KVM的版本也有关系），不同版本的选项略微有差别，使用如下命令查看版本： 12345678$ virt-install --version1.3.2 或 0.600.4 （我只接触过这两个版本）$ kvm -versionQEMU emulator version 2.5.0 (Debian 1:2.5+dfsg-5ubuntu10.30), Copyright (c) 2003-2008 Fabrice Bellard或# kvm -versionQEMU emulator version 2.0.0 (Debian 2.0.0+dfsg-2ubuntu1.33), Copyright (c) 2003-2008 Fabrice Bellard 一种兼容前后版本的命令如下： 123456virt-install --virt-type kvm --name ubuntu --ram 4096 --vcpus=4 \ --import \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network bridge=br0,model=virtio \ --graphics vnc,listen=0.0.0.0 --noautoconsole \ --os-type=linux 只适用于新版本的命令如下： 123456virt-install --virt-type kvm --name docker-$1 --ram 4096 --vcpus=4 \ --cdrom=/home/kb310/test/ubuntu.qcow2 \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network bridge=br0,model=virtio \ --graphics vnc,listen=0.0.0.0 --noautoconsole \ --os-type=linux 主要的区别就在于 –import 选项是兼容的，而使用 –cdrom 只适用于新版本。 图形界面实现：对于图形界面就是通过 virt-manager 来实现，但是这种方法貌似只适用于较新版本KVM环境，步骤如下： 打开 virtual machine mananger，-&gt; 点击右上角新建虚拟机 选择 Import existing disk image，-&gt; Forward 点击 Browse 点击 Browse Local，找到虚拟机磁盘镜像文件，-&gt;Choose Volume 点击 Forward 配置合适的内存和 CPU 个数，-&gt; Forward 给虚拟机命名（但注意这不是虚拟机里面的 hostname），-&gt; Finish 最后就会进入虚拟机的系统启动过程 遇到的问题由于教研室有一些服务器的使用年限较长，有一些服务器的系统和软件版本较低，在使用 KVM 时碰到一些很烦人的问题，所以才写下这篇博客记录一下。如果在旧版本的环境下使用新环境才支持的命令选项，就可能会出现一些问题，如： 1234567891011121314$ virt-install --virt-type kvm --name docker-$1 --ram 4096 --vcpus=4 \ --cdrom=/home/kb310/test/ubuntu.qcow2 \ --disk path=/home/kb310/test/ubuntu.qcow2,format=qcow2 \ --network bridge=br0,model=virtio \ --graphics vnc,listen=0.0.0.0 --noautoconsole \ --os-type=linuxStarting install...ERROR internal error: process exited while connecting to monitor: qemu-system-x86_64: -drive file=/home/kb310/test/ubuntu.qcow2,if=none,id=drive-ide0-0-0,format=qcow2: could not open disk image /home/kb310/test/ubuntu.qcow2: Could not open &apos;/home/kb310/test/ubuntu.qcow2&apos;: Permission deniedDomain installation does not appear to have been successful.If it was, you can restart your domain by running: virsh --connect qemu:///system start hghotherwise, please restart your installation. 上面出现的错误就是由于软件版本的不同导致的，所以最好使用兼容的命令选项。]]></content>
@@ -168,8 +179,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>shadowsocks</tag>
         <tag>ubuntu</tag>
+        <tag>shadowsocks</tag>
         <tag>privoxy</tag>
       </tags>
   </entry>
@@ -181,8 +192,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>centos</tag>
         <tag>shadowsocks</tag>
+        <tag>centos</tag>
         <tag>BBR</tag>
       </tags>
   </entry>
@@ -265,10 +276,10 @@
         <category>云计算</category>
       </categories>
       <tags>
+        <tag>KVM</tag>
         <tag>Openstack</tag>
         <tag>云计算</tag>
         <tag>虚拟化</tag>
-        <tag>KVM</tag>
       </tags>
   </entry>
   <entry>
@@ -304,10 +315,10 @@
         <category>KVM</category>
       </categories>
       <tags>
-        <tag>Openstack</tag>
         <tag>KVM</tag>
-        <tag>ubuntu</tag>
+        <tag>Openstack</tag>
         <tag>vnc</tag>
+        <tag>ubuntu</tag>
         <tag>Virtual Machine</tag>
       </tags>
   </entry>

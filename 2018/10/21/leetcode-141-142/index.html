@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="shell,linux,chsh," />
+  <meta name="keywords" content="LeetCode," />
 
 
 
@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="最近又翻阅了几本Linux相关的工具书，在这里记录一些关于Linux shell的新的小小的收获。">
-<meta name="keywords" content="shell,linux,chsh">
+<meta name="description" content="141. Linked List CycleGiven a linked list, determine if it has a cycle in it. Follow up:Can you solve it without using extra space?">
+<meta name="keywords" content="LeetCode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于Linux Shell新的收获">
-<meta property="og:url" content="http://cao0507.github.io/2018/07/21/关于Shell新的收获/index.html">
+<meta property="og:title" content="leetcode-141-142">
+<meta property="og:url" content="http://cao0507.github.io/2018/10/21/leetcode-141-142/index.html">
 <meta property="og:site_name" content="WooOh&#39;s blog">
-<meta property="og:description" content="最近又翻阅了几本Linux相关的工具书，在这里记录一些关于Linux shell的新的小小的收获。">
+<meta property="og:description" content="141. Linked List CycleGiven a linked list, determine if it has a cycle in it. Follow up:Can you solve it without using extra space?">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-24T16:28:29.616Z">
+<meta property="og:updated_time" content="2018-10-21T13:39:09.963Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于Linux Shell新的收获">
-<meta name="twitter:description" content="最近又翻阅了几本Linux相关的工具书，在这里记录一些关于Linux shell的新的小小的收获。">
+<meta name="twitter:title" content="leetcode-141-142">
+<meta name="twitter:description" content="141. Linked List CycleGiven a linked list, determine if it has a cycle in it. Follow up:Can you solve it without using extra space?">
 
 
 
@@ -121,13 +121,13 @@
 
 
 
-  <link rel="canonical" href="http://cao0507.github.io/2018/07/21/关于Shell新的收获/"/>
+  <link rel="canonical" href="http://cao0507.github.io/2018/10/21/leetcode-141-142/"/>
 
 
 
 
 
-  <title>关于Linux Shell新的收获 | WooOh's blog</title>
+  <title>leetcode-141-142 | WooOh's blog</title>
   
 
 
@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2018/07/21/关于Shell新的收获/">
+    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2018/10/21/leetcode-141-142/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="WooOh">
@@ -325,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">关于Linux Shell新的收获</h1>
+          <h1 class="post-title" itemprop="name headline">leetcode-141-142</h1>
         
 
         <div class="post-meta">
@@ -337,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T14:10:46+08:00">
-                2018-07-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-21T21:36:57+08:00">
+                2018-10-21
               </time>
             
 
@@ -360,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Shell</span>
+                  <a href="/categories/LeetCode/" itemprop="url" rel="index">
+                    <span itemprop="name">LeetCode</span>
                   </a>
                 </span>
 
@@ -379,8 +379,8 @@
                 <i class="fa fa-comment-o"></i>
               </span>
               
-                <a href="/2018/07/21/关于Shell新的收获/#SOHUCS" itemprop="discussionUrl">
-                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/07/21/关于Shell新的收获/" itemprop="commentsCount"></span>
+                <a href="/2018/10/21/leetcode-141-142/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/10/21/leetcode-141-142/" itemprop="commentsCount"></span>
                 </a>
               
             
@@ -388,7 +388,7 @@
 
           
           
-             <span id="/2018/07/21/关于Shell新的收获/" class="leancloud_visitors" data-flag-title="关于Linux Shell新的收获">
+             <span id="/2018/10/21/leetcode-141-142/" class="leancloud_visitors" data-flag-title="leetcode-141-142">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 mins
+                  3 mins
                 </span>
               
             </div>
@@ -437,42 +437,38 @@
       
 
       
-        <p>最近又翻阅了几本Linux相关的工具书，在这里记录一些关于Linux shell的新的小小的收获。</p>
+        <h3 id="141-Linked-List-Cycle"><a href="#141-Linked-List-Cycle" class="headerlink" title="141. Linked List Cycle"></a>141. <a href="https://leetcode.com/problems/linked-list-cycle/description/" target="_blank" rel="noopener">Linked List Cycle</a></h3><p>Given a linked list, determine if it has a cycle in it.</p>
+<p>Follow up:<br>Can you solve it without using extra space?</p>
 <a id="more"></a>
-<h1 id="查看正在使用的shell"><a href="#查看正在使用的shell" class="headerlink" title="查看正在使用的shell"></a>查看正在使用的shell</h1><p>有很多方法可以查看当前正在使用的shell：</p>
+<hr>
+<h4 id="题意理解"><a href="#题意理解" class="headerlink" title="题意理解"></a>题意理解</h4><p>给定一个链表，判断链表中是否有环。不要有额外的空间消耗。</p>
+<hr>
+<h4 id="解法思路"><a href="#解法思路" class="headerlink" title="解法思路"></a>解法思路</h4><p><strong>双指针法：</strong></p>
+<p>最常用的方法，快慢指针，慢指针每次移动一步，快指针一次移动两步。如果链表中没有环，那么快指针将先到达链表结尾，并且指向 NULL；如果链表中有环，则快指针会在环中循环，直到慢指针进入环中，快指针将会追上慢指针，两者相等。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">hasCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        ListNode* fast = head-&gt;next;</span><br><span class="line">        <span class="keyword">while</span>(fast-&gt;next != <span class="literal">NULL</span> &amp;&amp; fast-&gt;next-&gt;next != <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (slow == fast)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><strong>复杂度分析</strong></p>
 <ul>
-<li><p>使用特殊参数<code>$0</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ echo $0</span><br><span class="line">-bash</span><br></pre></td></tr></table></figure>
-<p>对于这里有点疑问的是有资料说在<strong>本地系统</strong>执行可能的结果会是<code>/bin/bash</code>，但是我尝试了一下发现结果还是<code>bash</code>或者<code>-bash</code>。不知道资料中说的本地系统指的是什么意思。</p>
-</li>
-<li><p>输入不存在的命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ asdf</span><br><span class="line">-bash: asdf: command not found</span><br></pre></td></tr></table></figure>
-<p>从shell提示中可以看出当前正在使用的shell是bash。</p>
-</li>
+<li>时间复杂度：O(N)。如果链表中无环，则在快指针到达链表结尾时经过 N/2 步左右，所以复杂度为 O(N)；如果链表中有环，则最坏情况下，当慢指针几乎绕环一圈时快指针才追上它，所以是 N 步左右，所以复杂度为 O(N)。综上，时间复杂度为 O(N)。</li>
+<li>空间复杂度：O(1)。只使用了两个指针。</li>
 </ul>
-<h1 id="查看用户登录默认的shell"><a href="#查看用户登录默认的shell" class="headerlink" title="查看用户登录默认的shell"></a>查看用户登录默认的shell</h1><ul>
-<li><p>通过查看<code>/etc/passwd</code>文件找到用户对应的那一行，最后一列就是用户登录的shell</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user1@ubuntu:~$ cat /etc/passwd | grep user1</span><br><span class="line">user1:x:1000:1000:user1,,,:/home/user1:/bin/bash</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>最常用的方法：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ echo $SHELL</span><br><span class="line">/bin/bash</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>从环境变量中查看：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ env |grep SHELL</span><br><span class="line">SHELL=/bin/bash</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h1 id="切换用户正在使用的shell"><a href="#切换用户正在使用的shell" class="headerlink" title="切换用户正在使用的shell"></a>切换用户正在使用的shell</h1><p>直接输入对应shell的命令即可切换：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ echo $0</span><br><span class="line">-bash    &lt;==当前正在使用的shell</span><br><span class="line">$ zsh    &lt;==运行zsh</span><br><span class="line">$ echo $0</span><br><span class="line">zsh      &lt;==当前正在使用的shell已经变成zsh</span><br></pre></td></tr></table></figure>
-<h1 id="修改用户的登录shell"><a href="#修改用户的登录shell" class="headerlink" title="修改用户的登录shell"></a>修改用户的登录shell</h1><ul>
-<li><p>首先可以查看用户合法的shell：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ chsh -l</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/sbin/nologin   &lt;==合法不可登录的shell</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/mksh</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
-<p><code>chsh -l</code>命令并不总是可用，对于某些Linux发行版，<code>chsh</code>命令没有<code>-l</code>的选项，如<code>ubuntu16.04</code>，但是可以直接查看/etc/shells文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/shells</span><br><span class="line">/bin/sh</span><br><span class="line">/bin/bash</span><br><span class="line">/sbin/nologin   &lt;==合法不可登录的shell</span><br><span class="line">/bin/tcsh</span><br><span class="line">/bin/csh</span><br><span class="line">/bin/mksh</span><br><span class="line">/bin/ksh</span><br><span class="line">/bin/zsh</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>修改用户登录shell</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ chsh -s /bin/zsh</span><br><span class="line">Password:</span><br><span class="line">$ cat /etc/passwd | grep user1</span><br><span class="line">user1:x:1000:1000:user1,,,:/home/user1:/bin/zsh   &lt;== /etc/passwd文件中已经发生变化</span><br><span class="line">$ echo $SHELL</span><br><span class="line">/bin/bash      &lt;==但是再次查看$SHELL，发现并没有变，其实退出shell再次登录就会看到变化了</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
+<hr>
+<h3 id="142-Linked-List-Cycle-II"><a href="#142-Linked-List-Cycle-II" class="headerlink" title="142. Linked List Cycle II"></a>142. <a href="https://leetcode.com/problems/linked-list-cycle-ii/description/" target="_blank" rel="noopener">Linked List Cycle II</a></h3><p>Given a linked list, return the node where the cycle begins. If there is no cycle, return <code>null</code>.</p>
+<p><strong>Note:</strong> Do not modify the linked list.</p>
+<p><strong>Follow up</strong>:<br>Can you solve it without using extra space?</p>
+<hr>
+<h4 id="题意理解-1"><a href="#题意理解-1" class="headerlink" title="题意理解"></a>题意理解</h4><p>给定一个链表，如果链表中有环，返回环开始的节点；如果没有环，则返回 null。并且不能修改这个链表。</p>
+<hr>
+<h4 id="解法思路-1"><a href="#解法思路-1" class="headerlink" title="解法思路"></a>解法思路</h4><p>和上面那题一样，都是使用<strong>双指针法</strong>，但是要输出环开始的节点需要一些其他的计算。</p>
+<p>假设经过 <strong>k</strong> 步，快慢指针相遇；假设<strong>环的长度</strong>是 <strong>r</strong>；所以有：<code>2k - k = nr</code>，即 <code>k = nr</code> （其中n表示快指针在环中循环的次数）。</p>
+<p>假设<strong>链表表头</strong>到<strong>环的起点</strong>的距离为 s；假设<strong>环的起点</strong>到<strong>快慢指针相遇的节点</strong>的距离为 m；所以有：<code>s = k - m</code>。</p>
+<p><code>s = nr - m = (n - 1) + (r - m)，n = 1,2,3,...</code></p>
+<p>所以，可以再使用两个指针，慢指针从链表表头开始，每次移动一步；快指针从<strong>快慢指针相遇的节点</strong>开始，每次也移动一步，那么经过 s 步之后，快慢指针将会在<strong>环的起点</strong>相遇。</p>
+<p>代码如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function">ListNode *<span class="title">detectCycle</span><span class="params">(ListNode *head)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (head == <span class="literal">NULL</span> || head-&gt;next == <span class="literal">NULL</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">        ListNode* slow = head;</span><br><span class="line">        ListNode* fast = head;</span><br><span class="line">        <span class="keyword">while</span> (fast != <span class="literal">NULL</span> &amp;&amp;fast-&gt;next != <span class="literal">NULL</span>)&#123;</span><br><span class="line">            slow = slow-&gt;next;</span><br><span class="line">            fast = fast-&gt;next-&gt;next;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span> (slow == fast)&#123;</span><br><span class="line">                slow = head;</span><br><span class="line">                fast = fast;</span><br><span class="line">                <span class="keyword">while</span> (slow != fast)&#123;</span><br><span class="line">                    slow = slow-&gt;next;</span><br><span class="line">                    fast = fast-&gt;next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> slow;</span><br><span class="line">            &#125;           </span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>复杂度和上一题一样，都为 O(N).</p>
+</blockquote>
 <hr>
 
       
@@ -523,7 +519,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://cao0507.github.io/2018/07/21/关于Shell新的收获/" title="关于Linux Shell新的收获">http://cao0507.github.io/2018/07/21/关于Shell新的收获/</a>
+    <a href="http://cao0507.github.io/2018/10/21/leetcode-141-142/" title="leetcode-141-142">http://cao0507.github.io/2018/10/21/leetcode-141-142/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -538,11 +534,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/shell/" rel="tag"># shell</a>
-          
-            <a href="/tags/linux/" rel="tag"># linux</a>
-          
-            <a href="/tags/chsh/" rel="tag"># chsh</a>
+            <a href="/tags/LeetCode/" rel="tag"># LeetCode</a>
           
         </div>
       
@@ -555,8 +547,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/07/09/自动化脚本与程序实现/" rel="next" title="自动化脚本与程序实现">
-                <i class="fa fa-chevron-left"></i> 自动化脚本与程序实现
+              <a href="/2018/10/19/从虚拟机磁盘镜像创建虚拟机/" rel="next" title="KVM 从虚拟机磁盘镜像创建虚拟机">
+                <i class="fa fa-chevron-left"></i> KVM 从虚拟机磁盘镜像创建虚拟机
               </a>
             
           </div>
@@ -564,10 +556,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/24/KVM虚拟机磁盘扩容/" rel="prev" title="KVM 虚拟机磁盘扩容">
-                KVM 虚拟机磁盘扩容 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -736,7 +724,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#查看正在使用的shell"><span class="nav-number">1.</span> <span class="nav-text">查看正在使用的shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#查看用户登录默认的shell"><span class="nav-number">2.</span> <span class="nav-text">查看用户登录默认的shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#切换用户正在使用的shell"><span class="nav-number">3.</span> <span class="nav-text">切换用户正在使用的shell</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#修改用户的登录shell"><span class="nav-number">4.</span> <span class="nav-text">修改用户的登录shell</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#141-Linked-List-Cycle"><span class="nav-number">1.</span> <span class="nav-text">141. Linked List Cycle</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题意理解"><span class="nav-number">1.1.</span> <span class="nav-text">题意理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法思路"><span class="nav-number">1.2.</span> <span class="nav-text">解法思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#142-Linked-List-Cycle-II"><span class="nav-number">2.</span> <span class="nav-text">142. Linked List Cycle II</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#题意理解-1"><span class="nav-number">2.1.</span> <span class="nav-text">题意理解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#解法思路-1"><span class="nav-number">2.2.</span> <span class="nav-text">解法思路</span></a></li></ol></li></ol></div>
             
 
           </div>
