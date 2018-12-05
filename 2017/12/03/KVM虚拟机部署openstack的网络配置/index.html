@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="KVM,Openstack,vnc,ubuntu,Virtual Machine," />
+  <meta name="keywords" content="Openstack,KVM,vnc,ubuntu,Virtual Machine," />
 
 
 
@@ -81,7 +81,7 @@
 
 
 <meta name="description" content="概述这篇文章记录的是按照官方文档在KVM环境下部署双节点openstack过程中，前期准备KVM环境和网络配置相关的内容，在完成这篇博客涉及到的工作之后就可以按照官方文档手动安装openstack了。本文涉及的主要工作，首先是在服务器的ubuntu 16.04 desktop版系统上搭建kvm环境，然后在服务器上安装VNC远程桌面，最后在KVM环境中开启两台虚拟机，分别两张网卡，第一张网卡使用桥接">
-<meta name="keywords" content="KVM,Openstack,vnc,ubuntu,Virtual Machine">
+<meta name="keywords" content="Openstack,KVM,vnc,ubuntu,Virtual Machine">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KVM虚拟机部署openstack的网络配置">
 <meta property="og:url" content="http://cao0507.github.io/2017/12/03/KVM虚拟机部署openstack的网络配置/index.html">
@@ -93,7 +93,7 @@
 <meta property="og:image" content="https://raw.githubusercontent.com/cao0507/Pictures/master/blog/openstack%20network.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/cao0507/Pictures/master/blog/%E6%A1%A5%E6%8E%A5%E6%A8%A1%E5%BC%8F%E7%BD%91%E5%8D%A1.png">
 <meta property="og:image" content="https://raw.githubusercontent.com/cao0507/Pictures/master/blog/NAT%E7%BD%91%E5%8D%A1.png">
-<meta property="og:updated_time" content="2018-07-09T05:47:30.494Z">
+<meta property="og:updated_time" content="2018-11-06T03:06:03.075Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KVM虚拟机部署openstack的网络配置">
 <meta name="twitter:description" content="概述这篇文章记录的是按照官方文档在KVM环境下部署双节点openstack过程中，前期准备KVM环境和网络配置相关的内容，在完成这篇博客涉及到的工作之后就可以按照官方文档手动安装openstack了。本文涉及的主要工作，首先是在服务器的ubuntu 16.04 desktop版系统上搭建kvm环境，然后在服务器上安装VNC远程桌面，最后在KVM环境中开启两台虚拟机，分别两张网卡，第一张网卡使用桥接">
@@ -496,6 +496,7 @@
 <h2 id="配置防火墙，配置和启动服务"><a href="#配置防火墙，配置和启动服务" class="headerlink" title="配置防火墙，配置和启动服务"></a>配置防火墙，配置和启动服务</h2><p><code># ufw allow 5900</code></p>
 <p><code># systemctl enable x11vnc.service</code></p>
 <p><code># systemctl daemon-reload</code></p>
+<p><code># systemctl start x11vnc.service</code></p>
 <p>完成这四个步骤然后重启就可以了。（这个VNC的安装过程可以参考<a href="http://blog.csdn.net/longhr/article/details/51657610）" target="_blank" rel="noopener">http://blog.csdn.net/longhr/article/details/51657610）</a> </p>
 <p>最后在你自己的电脑需要有一个vnc viewer的软件，可以在这里下载（链接：<a href="https://pan.baidu.com/s/1o8kPqXG" target="_blank" rel="noopener">https://pan.baidu.com/s/1o8kPqXG</a> 密码：v5r2） </p>
 <h1 id="创建VM并配置相关信息"><a href="#创建VM并配置相关信息" class="headerlink" title="创建VM并配置相关信息"></a>创建VM并配置相关信息</h1><p>在安装好VNC后就可以登录服务器的远程桌面，打开一个terminal，在terminal中输入下面的命令可以打开Virtual Machine  Manager（注意，使用SSH远程登录服务器是无法打开virt-manager的界面的，一定要在登录了远程桌面后才能打开界面）</p>
@@ -573,9 +574,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/KVM/" rel="tag"># KVM</a>
-          
             <a href="/tags/Openstack/" rel="tag"># Openstack</a>
+          
+            <a href="/tags/KVM/" rel="tag"># KVM</a>
           
             <a href="/tags/vnc/" rel="tag"># vnc</a>
           
@@ -688,7 +689,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-count">26</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -710,7 +711,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">46</span>
+                  <span class="site-state-item-count">47</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
