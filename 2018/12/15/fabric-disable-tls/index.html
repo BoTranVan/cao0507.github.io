@@ -69,7 +69,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Hyperledger fabric,Hyperledger caliper," />
 
 
 
@@ -80,16 +80,22 @@
 
 
 
-<meta name="description" content="学着去分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WooOh&#39;s blog">
-<meta property="og:url" content="http://cao0507.github.io/archives/page/3/index.html">
+<meta name="description" content="前言最近在使用 Hyperledger Caliper 时，想通过 wireshark 抓包来分析 fabric 运行流程中各阶段的数据信息，但是发现 fabric 节点间的通信使用了传输层安全（Transport Layer Security，TLS）协议，使得通信的报文的内容在抓包后无法分析。因此考虑在测试环境中暂时关闭 TLS，从而能够直接查看报文中承载的数据内容。">
+<meta name="keywords" content="Hyperledger fabric,Hyperledger caliper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hyperledger Caliper Disable TLS">
+<meta property="og:url" content="http://cao0507.github.io/2018/12/15/fabric-disable-tls/index.html">
 <meta property="og:site_name" content="WooOh&#39;s blog">
-<meta property="og:description" content="学着去分享">
+<meta property="og:description" content="前言最近在使用 Hyperledger Caliper 时，想通过 wireshark 抓包来分析 fabric 运行流程中各阶段的数据信息，但是发现 fabric 节点间的通信使用了传输层安全（Transport Layer Security，TLS）协议，使得通信的报文的内容在抓包后无法分析。因此考虑在测试环境中暂时关闭 TLS，从而能够直接查看报文中承载的数据内容。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/Blockchain/caliper/enable_tls.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/Blockchain/caliper/disable_tls.png?raw=true">
+<meta property="og:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/Blockchain/caliper/disable-tls%20%E6%8A%93%E5%8C%85%E7%BB%93%E6%9E%9C.png?raw=true">
+<meta property="og:updated_time" content="2018-12-15T04:57:06.597Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WooOh&#39;s blog">
-<meta name="twitter:description" content="学着去分享">
+<meta name="twitter:title" content="Hyperledger Caliper Disable TLS">
+<meta name="twitter:description" content="前言最近在使用 Hyperledger Caliper 时，想通过 wireshark 抓包来分析 fabric 运行流程中各阶段的数据信息，但是发现 fabric 节点间的通信使用了传输层安全（Transport Layer Security，TLS）协议，使得通信的报文的内容在抓包后无法分析。因此考虑在测试环境中暂时关闭 TLS，从而能够直接查看报文中承载的数据内容。">
+<meta name="twitter:image" content="https://github.com/cao0507/My-Pictures-Repository/blob/master/Blockchain/caliper/enable_tls.png?raw=true">
 
 
 
@@ -119,13 +125,13 @@
 
 
 
-  <link rel="canonical" href="http://cao0507.github.io/archives/page/3/"/>
+  <link rel="canonical" href="http://cao0507.github.io/2018/12/15/fabric-disable-tls/"/>
 
 
 
 
 
-  <title>归档 | WooOh's blog</title>
+  <title>Hyperledger Caliper Disable TLS | WooOh's blog</title>
   
 
 
@@ -154,7 +160,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -292,305 +298,302 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://cao0507.github.io/2018/12/15/fabric-disable-tls/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="WooOh">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="WooOh's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Hyperledger Caliper Disable TLS</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-15T12:54:14+08:00">
+                2018-12-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 27 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/区块链/" itemprop="url" rel="index">
+                    <span itemprop="name">区块链</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/09/自动化脚本与程序实现/" itemprop="url">
-              
-                <span itemprop="name">自动化脚本与程序实现</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-09T13:42:29+08:00"
-              content="2018-07-09" >
-          07-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/07/07/远程免密码登录Openstack实例/" itemprop="url">
-              
-                <span itemprop="name">远程免密码登录Openstack实例</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-07-07T22:15:41+08:00"
-              content="2018-07-07" >
-          07-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/05/21/NAT网关设计/" itemprop="url">
-              
-                <span itemprop="name">NAT网关设计</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-05-21T16:43:35+08:00"
-              content="2018-05-21" >
-          05-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/22/虚拟化技术与云计算平台报告/" itemprop="url">
-              
-                <span itemprop="name">虚拟化技术与云计算平台报告</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-22T00:23:23+08:00"
-              content="2018-03-22" >
-          03-22
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/23/Openstack环境下手动安装Mistral/" itemprop="url">
+            
+              <span class="post-comments-count">
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-comment-o"></i>
+              </span>
               
-                <span itemprop="name">Openstack环境下手动安装Mistral</span>
+                <a href="/2018/12/15/fabric-disable-tls/#SOHUCS" itemprop="discussionUrl">
+                  <span id="changyan_count_unit" class="post-comments-count hc-comment-count" data-xid="2018/12/15/fabric-disable-tls/" itemprop="commentsCount"></span>
+                </a>
               
-            </a>
-        
-      </h2>
+            
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-23T23:12:22+08:00"
-              content="2017-12-23" >
-          12-23
-        </time>
-      </div>
+          
+          
+             <span id="/2018/12/15/fabric-disable-tls/" class="leancloud_visitors" data-flag-title="Hyperledger Caliper Disable TLS">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-    </header>
-  </article>
+          
 
+          
+            <div class="post-wordcount">
+              
 
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  6 mins
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/23/Openstack环境下手动安装Tacker/" itemprop="url">
-              
-                <span itemprop="name">Openstack环境下手动安装Tacker</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-23T14:12:37+08:00"
-              content="2017-12-23" >
-          12-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/12/03/KVM虚拟机部署openstack的网络配置/" itemprop="url">
-              
-                <span itemprop="name">KVM虚拟机部署openstack的网络配置</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-12-03T12:34:35+08:00"
-              content="2017-12-03" >
-          12-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在使用 Hyperledger Caliper 时，想通过 wireshark 抓包来分析 fabric 运行流程中各阶段的数据信息，但是发现 fabric 节点间的通信使用了传输层安全（Transport Layer Security，TLS）协议，使得通信的报文的内容在抓包后无法分析。因此考虑在测试环境中暂时关闭 TLS，从而能够直接查看报文中承载的数据内容。</p>
+<a id="more"></a>
+<hr>
+<h2 id="实现过程"><a href="#实现过程" class="headerlink" title="实现过程"></a>实现过程</h2><h4 id="1-在-docker-compose-的配置文件中修改环境变量"><a href="#1-在-docker-compose-的配置文件中修改环境变量" class="headerlink" title="1. 在 docker-compose 的配置文件中修改环境变量"></a>1. 在 docker-compose 的配置文件中修改环境变量</h4><p>本实验是在 Hyperledger Caliper 的测试环境中进行的，Caliper 测试工具在运行初始阶段会调用 docker-compose 启动 fabric 的网络，启动的 fabric 默认启用了 TLS，可以在其 docker-compose 的启动配置文件 docker-compose.yaml 中看到环境变量：</p>
+<ul>
+<li><code>FABRIC_CA_SERVER_TLS_ENABLED=true</code></li>
+<li><code>ORDERER_GENERAL_TLS_ENABLED=true</code></li>
+<li><code>CORE_PEER_TLS_ENABLED=true</code></li>
+</ul>
+<p>以上三个环境变量都设置为 true。如果要 disable TLS，则需在配置文件 docker-compose.yaml 中将这三个环境变量都注释掉，或者将它们设置为 false。即：</p>
+<ul>
+<li><code>FABRIC_CA_SERVER_TLS_ENABLED=false</code></li>
+<li><code>ORDERER_GENERAL_TLS_ENABLED=false</code></li>
+<li><code>CORE_PEER_TLS_ENABLED=false</code></li>
+</ul>
+<h4 id="2-修改-benchmark-中的-fabric-json-文件"><a href="#2-修改-benchmark-中的-fabric-json-文件" class="headerlink" title="2. 修改 benchmark 中的 fabric.json 文件"></a>2. 修改 benchmark 中的 fabric.json 文件</h4><p>在 benchmark 中的每个例子中，如 simple 的网络配置文件 fabric.json 中，client 与 peer 、orderer、ca 等节点都是通过 grpcs 或 https 来通信的，而这是在使用了 TLS 时的通信方式，因此需要将其改为 grpc 或 http 来通信。修改入下：</p>
+<ul>
+<li><code>orderer.url</code>：<code>grpcs://localhost:7050</code>  ==&gt;  <code>grpc://localhost:7050</code></li>
+<li><code>ca.url</code>：<code>https://localhost:7054</code>  ==&gt;  <code>http://localhost:7054</code></li>
+<li><code>peer1.requests</code>：<code>grpcs://localhost:7051</code>   ==&gt;  <code>grpc://localhost:7051</code></li>
+<li><code>peer1.events</code>：<code>grpcs://localhost:7053</code>   ==&gt;   <code>grpc://localhost:7053</code></li>
+</ul>
+<p>其他的都是如此修改。</p>
+<blockquote>
+<p>如果用 vim 编辑器的话，可以快捷的使用全局替换功能，在 normal 模式下输入冒号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt; :1,$  s/grpcs/grpc/g       #表示将第一行到最后一行间的所有grpcs替换成grpc</span><br><span class="line">&gt;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<h4 id="3-错误记录"><a href="#3-错误记录" class="headerlink" title="3. 错误记录"></a>3. 错误记录</h4><p>如果仅仅修改 docker-compose.yaml 文件中的环境变量，没有修改 fabric.json 中的通信方式的话，则在运行测试时会出现如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"># create mychannel......</span><br><span class="line">E1215 12:26:25.877864366    9327 ssl_transport_security.cc:989] Handshake failed with fatal error SSL_ERROR_SSL: error:1408F10B:SSL routines:SSL3_GET_RECORD:wrong version number.</span><br><span class="line">E1215 12:26:25.879670836    9327 ssl_transport_security.cc:989] Handshake failed with fatal error SSL_ERROR_SSL: error:1408F10B:SSL routines:SSL3_GET_RECORD:wrong version number.</span><br><span class="line">error: [Orderer.js]: sendBroadcast - on error: &quot;Error: 14 UNAVAILABLE: Connect Failed\n    at createStatusError (/home/user1/caliper/node_modules/grpc/src/client.js:64:15)\n    at ClientDuplexStream._emitStatusIfDone (/home/user1/caliper/node_modules/grpc/src/client.js:270:19)\n    at ClientDuplexStream._readsDone (/home/user1/caliper/node_modules/grpc/src/client.js:236:8)\n    at readCallback (/home/user1/caliper/node_modules/grpc/src/client.js:296:12)&quot;</span><br><span class="line">not ok 1 Failed to create channels Error: SERVICE_UNAVAILABLE at ClientDuplexStream.&lt;anonymous&gt; (/home/user1/caliper/node_modules/fabric-client/lib/Orderer.js:136:21) at emitOne (events.js:116:13) at ClientDuplexStream.emit (events.js:211:7) at ClientDuplexStream._emitStatusIfDone (/home/user1/caliper/node_modules/grpc/src/client.js:271:12) at ClientDuplexStream._readsDone (/home/user1/caliper/node_modules/grpc/src/client.js:236:8) at readCallback (/home/user1/caliper/node_modules/grpc/src/client.js:296:12)</span><br><span class="line">  ---</span><br><span class="line">    operator: fail</span><br><span class="line">    at: channels.reduce.then.then.catch (/home/user1/caliper/src/fabric/create-channel.js:159:19)</span><br><span class="line">    stack: |-</span><br><span class="line">      Error: Failed to create channels Error: SERVICE_UNAVAILABLE</span><br><span class="line">          at ClientDuplexStream.&lt;anonymous&gt; (/home/user1/caliper/node_modules/fabric-client/lib/Orderer.js:136:21)</span><br><span class="line">          at emitOne (events.js:116:13)</span><br><span class="line">          at ClientDuplexStream.emit (events.js:211:7)</span><br><span class="line">          at ClientDuplexStream._emitStatusIfDone (/home/user1/caliper/node_modules/grpc/src/client.js:271:12)</span><br><span class="line">          at ClientDuplexStream._readsDone (/home/user1/caliper/node_modules/grpc/src/client.js:236:8)</span><br><span class="line">          at readCallback (/home/user1/caliper/node_modules/grpc/src/client.js:296:12)</span><br><span class="line">          at Test.assert [as _assert] (/home/user1/caliper/node_modules/tape/lib/test.js:224:54)</span><br><span class="line">          at Test.bound [as _assert] (/home/user1/caliper/node_modules/tape/lib/test.js:76:32)</span><br><span class="line">          at Test.fail (/home/user1/caliper/node_modules/tape/lib/test.js:317:10)</span><br><span class="line">          at Test.bound [as fail] (/home/user1/caliper/node_modules/tape/lib/test.js:76:32)</span><br><span class="line">          at channels.reduce.then.then.catch (/home/user1/caliper/src/fabric/create-channel.js:159:19)</span><br><span class="line">          at &lt;anonymous&gt;</span><br><span class="line">          at process._tickCallback (internal/process/next_tick.js:189:7)</span><br><span class="line">  ...</span><br><span class="line">fabric.init() failed, Error: Fabric: Create channel failed</span><br><span class="line">    at channels.reduce.then.then.catch (/home/user1/caliper/src/fabric/create-channel.js:160:31)</span><br><span class="line">    at &lt;anonymous&gt;</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:189:7)</span><br><span class="line">[Transaction Info] - Submitted: 0 Succ: 0 Fail:0 Unfinished:0</span><br><span class="line">unexpected error, Error: Fabric: Create channel failed</span><br><span class="line">    at channels.reduce.then.then.catch (/home/user1/caliper/src/fabric/create-channel.js:160:31)</span><br><span class="line">    at &lt;anonymous&gt;</span><br><span class="line">    at process._tickCallback (internal/process/next_tick.js:189:7)</span><br></pre></td></tr></table></figure>
+<p>这个问题需要注意。</p>
+<hr>
+<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p>在 TLS 被开启或关闭两种情况下，能够发现关闭 TLS 后，系统的吞吐率略有提升，这是可想而知的，毕竟减少了一层传输层安全协议的封装。结果图如下：</p>
+<ul>
+<li><p><strong>Enable TLS</strong></p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/Blockchain/caliper/enable_tls.png?raw=true" alt=""></p>
+</li>
+<li><p><strong>Disable TLS</strong></p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/Blockchain/caliper/disable_tls.png?raw=true" alt=""></p>
+</li>
+</ul>
+<p>不过以上的结果在实际中的意义并不大，因为在实际应用中肯定需要进行传输层安全协议的封装，不然这区块链的安全从和谈起。</p>
+<p>如下图可以看到关闭 TLS 后，抓包后能够查看数据内容：</p>
+<p><img src="https://github.com/cao0507/My-Pictures-Repository/blob/master/Blockchain/caliper/disable-tls%20%E6%8A%93%E5%8C%85%E7%BB%93%E6%9E%9C.png?raw=true" alt=""></p>
+<p>太不安全了！所以以上内容均只能应用于测试。</p>
+<hr>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>感谢您的阅读，希望您能从中获益! (^_^)</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="WooOh 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="WooOh 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    WooOh
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://cao0507.github.io/2018/12/15/fabric-disable-tls/" title="Hyperledger Caliper Disable TLS">http://cao0507.github.io/2018/12/15/fabric-disable-tls/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Hyperledger-fabric/" rel="tag"># Hyperledger fabric</a>
+          
+            <a href="/tags/Hyperledger-caliper/" rel="tag"># Hyperledger caliper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/12/05/docker容器启动时端口映射失败/" rel="next" title="Docker 容器启动时端口映射失败">
+                <i class="fa fa-chevron-left"></i> Docker 容器启动时端口映射失败
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/archives/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/archives/">1</a><a class="page-number" href="/archives/page/2/">2</a><span class="page-number current">3</span>
-  </nav>
+  </article>
 
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -598,6 +601,15 @@
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="SOHUCS"></div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -618,8 +630,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -711,6 +732,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实现过程"><span class="nav-number">2.</span> <span class="nav-text">实现过程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-在-docker-compose-的配置文件中修改环境变量"><span class="nav-number">2.0.1.</span> <span class="nav-text">1. 在 docker-compose 的配置文件中修改环境变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-修改-benchmark-中的-fabric-json-文件"><span class="nav-number">2.0.2.</span> <span class="nav-text">2. 修改 benchmark 中的 fabric.json 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-错误记录"><span class="nav-number">2.0.3.</span> <span class="nav-text">3. 错误记录</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">3.</span> <span class="nav-text">结果</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -876,6 +913,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
