@@ -80,18 +80,18 @@
 
 
 
-<meta name="description" content="问题在搭建 Kubernetes 集群时，遇到这样一个问题，就是在 node 节点上使用 kubeadm join 时能够成功的加入节点，但是在 master 节点上却无法查看集群中的 node 节点。如下： 123456789101112131415node1$ sudo kubeadm join --token 1bc310.cb323487a828849e 10.2.7.114:6443 -">
+<meta name="description" content="问题在搭建 Kubernetes 集群时，遇到这样一个问题，就是在 node 节点上使用 kubeadm join 时能够成功的加入节点，但是在 master 节点上却无法查看集群中的 node 节点。如下：">
 <meta name="keywords" content="Bugs,kubeadm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="kubeadm join success but node not joined">
 <meta property="og:url" content="http://cao0507.github.io/2018/12/18/kubernetes-node-not-joined/index.html">
 <meta property="og:site_name" content="WooOh&#39;s blog">
-<meta property="og:description" content="问题在搭建 Kubernetes 集群时，遇到这样一个问题，就是在 node 节点上使用 kubeadm join 时能够成功的加入节点，但是在 master 节点上却无法查看集群中的 node 节点。如下： 123456789101112131415node1$ sudo kubeadm join --token 1bc310.cb323487a828849e 10.2.7.114:6443 -">
+<meta property="og:description" content="问题在搭建 Kubernetes 集群时，遇到这样一个问题，就是在 node 节点上使用 kubeadm join 时能够成功的加入节点，但是在 master 节点上却无法查看集群中的 node 节点。如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-18T08:46:25.223Z">
+<meta property="og:updated_time" content="2018-12-18T09:06:43.348Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="kubeadm join success but node not joined">
-<meta name="twitter:description" content="问题在搭建 Kubernetes 集群时，遇到这样一个问题，就是在 node 节点上使用 kubeadm join 时能够成功的加入节点，但是在 master 节点上却无法查看集群中的 node 节点。如下： 123456789101112131415node1$ sudo kubeadm join --token 1bc310.cb323487a828849e 10.2.7.114:6443 -">
+<meta name="twitter:description" content="问题在搭建 Kubernetes 集群时，遇到这样一个问题，就是在 node 节点上使用 kubeadm join 时能够成功的加入节点，但是在 master 节点上却无法查看集群中的 node 节点。如下：">
 
 
 
@@ -438,6 +438,7 @@
 
       
         <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>在搭建 Kubernetes 集群时，遇到这样一个问题，就是在 node 节点上使用 kubeadm join 时能够成功的加入节点，但是在 master 节点上却无法查看集群中的 node 节点。如下：</p>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">node1$ sudo kubeadm join --token 1bc310.cb323487a828849e 10.2.7.114:6443 --discovery-token-ca-cert-hash sha256:3d39f8fe34a043ccef4821014fd6d3e0f222614d37d59a6e4944c74f257c6d4d</span><br><span class="line">[preflight] Running pre-flight checks.</span><br><span class="line">	[WARNING FileExisting-crictl]: crictl not found in system path</span><br><span class="line">[discovery] Trying to connect to API Server &quot;10.2.7.114:6443&quot;</span><br><span class="line">[discovery] Created cluster-info discovery client, requesting info from &quot;https://10.2.7.114:6443&quot;</span><br><span class="line">[discovery] Requesting info from &quot;https://10.2.7.114:6443&quot; again to validate TLS against the pinned public key</span><br><span class="line">[discovery] Cluster info signature and contents are valid and TLS certificate validates against pinned roots, will use API Server &quot;10.2.7.114:6443&quot;</span><br><span class="line">[discovery] Successfully established connection with API Server &quot;10.2.7.114:6443&quot;</span><br><span class="line"></span><br><span class="line">This node has joined the cluster:</span><br><span class="line">* Certificate signing request was sent to master and a response</span><br><span class="line">  was received.</span><br><span class="line">* The Kubelet was informed of the new secure connection details.</span><br><span class="line"></span><br><span class="line">Run &apos;kubectl get nodes&apos; on the master to see this node join the cluster.</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">master$ kubectl get nodes</span><br><span class="line">NAME      STATUS    ROLES     AGE       VERSION</span><br><span class="line">ubuntu    Ready     master    4h        v1.9.1</span><br></pre></td></tr></table></figure>
 <h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>出现这个问题的原因是 node 节点的主机名与 master 节点的相同，因此需要给 所有的 node 节点取与 master 节点不同的主机名。</p>
