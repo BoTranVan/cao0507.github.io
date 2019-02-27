@@ -30,8 +30,8 @@
         <category>Kubernetes</category>
       </categories>
       <tags>
-        <tag>kubeadm</tag>
         <tag>Bugs</tag>
+        <tag>kubeadm</tag>
       </tags>
   </entry>
   <entry>
@@ -68,6 +68,28 @@
       <tags>
         <tag>Docker</tag>
         <tag>Bugs</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[socket编程之bind函数]]></title>
+    <url>%2F2018%2F11%2F07%2Fsocket%E7%BC%96%E7%A8%8B%E4%B9%8Bbind%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[bind 函数：关联地址和套接字定义： 12#include &lt;sys/socket.h&gt;int bind(int sockfd, const struct sockaddr *addr, socklen_t len); 返回值：若成功，返回 0；若出错，返回 -1. 使用 bind 时遇到的错误在练习 UNP 代码 daytimetcpsrv.c 时遇到两个问题： Permission denied 这是因为地址中的端口号必须不小于 1024，除非该进程具有相应的特权（即 root 用户）。 Address already in use 这个问题有时会让人很疑问，明明已经结束了使用对应端口的进程，端口应该不是 in use 的啊，但却无法再次调用 bind 函数来绑定该端口到一个套接字端点（bind 函数返回 EADDRINUSE）。其实这是由 TCP 套接字状态 TIME_WAIT 引起的，该状态在套接字关闭后约保留 2 到 4 分钟，因此无法再次绑定刚刚使用的端口。在 TIME_WAIT 状态退出之后，套接字被删除，该地址才能被重新绑定而不出问题。 可以通过 netstat -ant 来查看这个端口还处于 TIME_WAIT 状态： 等待 TIME_WAIT 结束可能是令人恼火的一件事，特别是如果您正在开发一个套接字服务器，就需要停止服务器来做一些改动，然后重启。幸运的是，有方法可以避开 TIME_WAIT 状态。可以给套接字应用 SO_REUSEADDR 套接字选项，以便端口可以马上重用。 对于 daytimetcpsrv.c，可以加上以下代码： 1234567int reuse = 1;listenfd = Socket(AF_INET, SOCK_STREAM, 0);if (setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &amp;reuse, sizeof(reuse)) &lt; 0) &#123; perror("setsockopet error\n"); return -1; &#125; 重新编译运行。]]></content>
+      <categories>
+        <category>UNIX网络编程</category>
+      </categories>
+      <tags>
+        <tag>bind</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[UNP练习：TCP时间获取程序]]></title>
+    <url>%2F2018%2F11%2F07%2FTCP%E6%97%B6%E9%97%B4%E8%8E%B7%E5%8F%96%E7%A8%8B%E5%BA%8F%2F</url>
+    <content type="text"><![CDATA[《UNIX 网络编程：卷1》学习记录1：书本上有两个程序： 1.2节：简单的 TCP 时间获取客户程序 1.5节：简单的 TCP 时间获取服务器程序 本文记录的是我在学习过程编写的 C++ 版本的程序（但其实还是 C 程序，hahaha…），为了熟悉 UNIX 函数库，这里并没有基于书中的 &lt;unp.h&gt; 头文件来编写，而是全部自己添加 C 函数库中的头文件。程序如下： 简单的 TCP 时间获取客户程序123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960#include &lt;iostream&gt;#include &lt;sys/socket.h&gt;#include &lt;netinet/in.h&gt;#include &lt;arpa/inet.h&gt;#include &lt;unistd.h&gt;#include &lt;string.h&gt;#include &lt;stdio.h&gt;#include &lt;cstdlib&gt;#define MAXLINE 4096using namespace std;int main(int argc, char **argv)&#123; int sockfd, n; char recevline[MAXLINE + 1]; // sockaddr_in结构定义在&lt;netinet/in.h&gt;头文件中 struct sockaddr_in servaddr; if (argc != 3)&#123; cerr &lt;&lt; "usage: " &lt;&lt; argv[0] &lt;&lt; " &lt;IPaddress&gt; &lt;port&gt;" &lt;&lt; endl; return 0; &#125; //socket()在&lt;sys/socket.h&gt; if ( (sockfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0 )&#123; cerr &lt;&lt; "socket error" &lt;&lt; endl; return 0; &#125; bzero(&amp;servaddr, sizeof(servaddr)); //定义在&lt;string.h&gt;头文件中 servaddr.sin_family = AF_INET; servaddr.sin_port = htons(atoi(argv[2])); //头文件&lt;arpa/inet.h&gt; //inet_pton()在头文件&lt;arpa/inet.h&gt; if ( inet_pton(AF_INET, argv[1], &amp;servaddr.sin_addr) &lt;= 0 )&#123; cerr &lt;&lt; "inet_pton error for " &lt;&lt; argv[1] &lt;&lt; endl; return 0; &#125; if (connect(sockfd, (struct sockaddr *) &amp;servaddr, sizeof(servaddr)) &lt; 0)&#123; cerr &lt;&lt; "connect error" &lt;&lt; endl; return 0; &#125; while ( (n = read(sockfd, recevline, MAXLINE)) &gt; 0 )&#123; //头文件&lt;unisted.h&gt; recevline[n] = 0; if ( fputs(recevline, stdout) == EOF )&#123; //头文件&lt;stdio.h&gt; cerr &lt;&lt; "fputs error" &lt;&lt; endl; return 0; &#125; &#125; if ( n &lt; 0 )&#123; cerr &lt;&lt; "read error" &lt;&lt; endl; return 0; &#125; return 0;&#125; 简单的 TCP 时间获取服务器程序12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667#include &lt;iostream&gt;#include &lt;time.h&gt;#include &lt;sys/socket.h&gt;#include &lt;netinet/in.h&gt;#include &lt;unistd.h&gt;#include &lt;string.h&gt;#include &lt;stdio.h&gt;#include &lt;cstdlib&gt;#define MAXLINE 4096#define LISTENQ 1024using namespace std;int main(int argc, char **argv)&#123; int listenfd, connfd; struct sockaddr_in servaddr; // sockaddr_in结构定义在&lt;netinet/in.h&gt;头文件中 char buff[MAXLINE]; time_t ticks; if (argc != 2)&#123; cerr &lt;&lt; "usage: " &lt;&lt; argv[0] &lt;&lt; " &lt;listen_port&gt;" &lt;&lt; endl; return 0; &#125; if ( (listenfd = socket(AF_INET, SOCK_STREAM, 0)) &lt; 0 )&#123; cerr &lt;&lt; "socket error" &lt;&lt; endl; return 0; &#125; bzero(&amp;servaddr, sizeof(servaddr)); //定义在&lt;string.h&gt;头文件中 servaddr.sin_family = AF_INET; servaddr.sin_addr.s_addr = htonl(INADDR_ANY); //头文件&lt;arpa/inet.h&gt; servaddr.sin_port = htons(atoi(argv[1])); //头文件&lt;arpa/inet.h&gt; //bind()在头文件&lt;sys/socket.h&gt;中 if ( bind(listenfd, (struct sockaddr *) &amp;servaddr, sizeof(servaddr)) &lt; 0 )&#123; cerr &lt;&lt; "bind error" &lt;&lt; endl; return 0; &#125; if (listen(listenfd, LISTENQ) &lt; 0)&#123; //头文件&lt;sys/socket.h&gt; cerr &lt;&lt; "listen error" &lt;&lt; endl; return 0; &#125; for (;;)&#123; if ((connfd = accept(listenfd, (struct sockaddr *) NULL, NULL)) &lt; 0)&#123; cerr &lt;&lt; "accept error" &lt;&lt; endl; return 0; &#125; ticks = time(NULL); snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&amp;ticks));//c头文件&lt;stdio.h&gt; 或c++头文件&lt;cstdlib&gt; if ( write(connfd, buff, strlen(buff)) &lt; 0 )&#123; //头文件&lt;unisted&gt; cerr &lt;&lt; "write error" &lt;&lt; endl; return 0; &#125; if (close(connfd) &lt; 0)&#123; //头文件&lt;unisted&gt; cerr &lt;&lt; "close error" &lt;&lt; endl; return 0; &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>UNIX网络编程</category>
+      </categories>
+      <tags>
+        <tag>socket</tag>
       </tags>
   </entry>
   <entry>
@@ -262,8 +284,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>shadowsocks</tag>
         <tag>centos</tag>
+        <tag>shadowsocks</tag>
         <tag>BBR</tag>
       </tags>
   </entry>
@@ -346,10 +368,10 @@
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>Openstack</tag>
-        <tag>KVM</tag>
         <tag>云计算</tag>
         <tag>虚拟化</tag>
+        <tag>Openstack</tag>
+        <tag>KVM</tag>
       </tags>
   </entry>
   <entry>
@@ -361,8 +383,8 @@
       </categories>
       <tags>
         <tag>Openstack</tag>
-        <tag>Mistral</tag>
         <tag>Tacker</tag>
+        <tag>Mistral</tag>
       </tags>
   </entry>
   <entry>
