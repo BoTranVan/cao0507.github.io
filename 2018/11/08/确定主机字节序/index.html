@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="WooOh&#39;s blog">
 <meta property="og:description" content="确定主机字节序的程序记录 UNP 学习第三章的确定主机字节序的程序，使用 C++ 语言编写。 程序如下：">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-01T06:48:50.099Z">
+<meta property="og:updated_time" content="2019-03-10T09:16:38.968Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UNP练习：确定主机字节序">
 <meta name="twitter:description" content="确定主机字节序的程序记录 UNP 学习第三章的确定主机字节序的程序，使用 C++ 语言编写。 程序如下：">
@@ -416,7 +416,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 mins
+                  3 mins
                 </span>
               
             </div>
@@ -463,6 +463,13 @@
 <blockquote>
 <p>对于一个二进制或十六进制的值，如 0x01020304，位于左边的 0x01 字节是高序字节，位于右边 0x04 的是低序字节。</p>
 </blockquote>
+<hr>
+<h3 id="或者用以下更简单的程序来确定："><a href="#或者用以下更简单的程序来确定：" class="headerlink" title="或者用以下更简单的程序来确定："></a>或者用以下更简单的程序来确定：</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">short</span> val = <span class="number">0x0102</span>;</span><br><span class="line">    <span class="keyword">char</span> *p = (<span class="keyword">char</span> *) &amp;val;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (*p == <span class="number">1</span> &amp;&amp; *(p+<span class="number">1</span>) == <span class="number">2</span>)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"big-endian"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (*p == <span class="number">2</span> &amp;&amp; *(p+<span class="number">1</span>) == <span class="number">1</span>)</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; <span class="string">"little-endian"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将短整形变量 val 的地址强制转换成字符型指针的地址 p。p 是低地址，(p+1)是高地址。0x01是 val 的高有效字节，0x02是 val 的低有效字节。则有一下两种情况：</p>
+<ul>
+<li><code>*p == 0x01 &amp;&amp; *(p+1) == 0x02</code>：高有效字节存放在低地址，大端模式。</li>
+<li><code>*p == 0x02 &amp;&amp; *(p+1) == 0x01</code>：低有效字节存放在低地址，小端模式。</li>
+</ul>
 <hr>
 
       
@@ -639,7 +646,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -650,7 +657,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-count">14</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -661,7 +668,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">54</span>
+                  <span class="site-state-item-count">55</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -722,7 +729,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定主机字节序的程序"><span class="nav-number">1.</span> <span class="nav-text">确定主机字节序的程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大端模式与小端模式理解"><span class="nav-number">2.</span> <span class="nav-text">大端模式与小端模式理解</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#确定主机字节序的程序"><span class="nav-number">1.</span> <span class="nav-text">确定主机字节序的程序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大端模式与小端模式理解"><span class="nav-number">2.</span> <span class="nav-text">大端模式与小端模式理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#或者用以下更简单的程序来确定："><span class="nav-number">3.</span> <span class="nav-text">或者用以下更简单的程序来确定：</span></a></li></ol></div>
             
 
           </div>
