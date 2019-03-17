@@ -88,7 +88,7 @@
 <meta property="og:site_name" content="WooOh&#39;s blog">
 <meta property="og:description" content="sizeof 运算符需要注意的是 sizeof() 是运算符，而不是一个函数，在编译时就计算好了，用于计算数据空间的字节数。因此，sizeof 不能用来返回动态分配的内存空间的大小。sizeof 常用于返回类型和静态分配的对象、结构或数组所占的空间，返回值跟对象、结构、数组所存储的内容没有关系。 本文将介绍使用 sizeof 来判定 共用体、结构体、嵌套结构体、混合结构体 以及 类对象 所占空间的">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-12T09:45:15.455Z">
+<meta property="og:updated_time" content="2019-03-12T14:52:40.134Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++中 sizeof 的用法总结">
 <meta name="twitter:description" content="sizeof 运算符需要注意的是 sizeof() 是运算符，而不是一个函数，在编译时就计算好了，用于计算数据空间的字节数。因此，sizeof 不能用来返回动态分配的内存空间的大小。sizeof 常用于返回类型和静态分配的对象、结构或数组所占的空间，返回值跟对象、结构、数组所存储的内容没有关系。 本文将介绍使用 sizeof 来判定 共用体、结构体、嵌套结构体、混合结构体 以及 类对象 所占空间的">
@@ -490,7 +490,7 @@
 <p>long 类型与指针类型在 32 位机器上只占 4 字节，在 64 位机器上占 8 字节。其他类型在 32 位机器和 64 位机器都是占同样的大小空间。</p>
 <hr>
 <h4 id="共用体的大小"><a href="#共用体的大小" class="headerlink" title="共用体的大小"></a>共用体的大小</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">union A&#123;</span><br><span class="line">    int a[5];</span><br><span class="line">    char b;</span><br><span class="line">    double c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">cout &lt;&lt; sizeof(A) &lt;&lt; endl;</span><br></pre></td></tr></table></figure>
-<p>上面求出共用体的大小为：==24==</p>
+<p>上面求出共用体的大小为：<strong>24</strong></p>
 <p>union 中变量共用内存，应以最长的为准，A 中最长的成员是数组 a，其长度为 20。与结果不一样，这是因为在共用体内变量的默认对齐方式，必须以最长的 double（8Byte）对齐，所以得到 sizeof(A) = 24。所以将共用体内的 int a[5] 修改成 int a[6] 后，结果仍然不变；但如果将 int a[5] 修改成 int a[7]，结果就变成 32。</p>
 <blockquote>
 <p><strong>对齐系数</strong>：每个平台上的编译器都有默认对齐系数 n，但是可以通过 <code>#pragma pack(n)</code> 来设定。</p>
@@ -498,7 +498,7 @@
 </blockquote>
 <p>通过下面的例子说明有效对齐系数：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> pack(4)</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">union</span> A&#123;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">5</span>];</span><br><span class="line">    <span class="keyword">char</span> b;</span><br><span class="line">    <span class="keyword">double</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(A) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<p>输出为：==20==</p>
+<p>输出为：<strong>20</strong></p>
 <p>这是因为通过 <code>#pragma pack(n)</code> 设置对齐系数为 4，所以实际的有效对齐系数为：min(4, sizeof(double)) = 4，所以最后共用体 A 的大小为 5*int(4) = 20。</p>
 <hr>
 <h4 id="结构体的大小"><a href="#结构体的大小" class="headerlink" title="结构体的大小"></a>结构体的大小</h4><p>首先介绍一个概念和两条原则：</p>
@@ -510,7 +510,7 @@
 </ol>
 <p>例子：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">B</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="keyword">double</span> b;</span><br><span class="line">    <span class="keyword">int</span> c;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(B) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<p>输出为：==24== </p>
+<p>输出为：<strong>24</strong></p>
 <p>这是因为 char a 的偏移量为 0，占用 1Byte；double b 指的下一个可用的地址的偏移量为 1，不是 sizeof(double)=8 的整数倍，需要补足 7Byte 才能是偏移量为 8；int c 指的下一个可用的地址的偏移量为 16，是 sizeof(int)=4 的整数倍，满足 int 的对齐方式。</p>
 <p>故所有成员的变量都分配了空间，空间总的大小为 1+7+8+4 = 20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数 sizeof(double)=8）的倍数，所以需要填充 4Byte，以满足结构的大小为 sizeof(double)=8 的倍数，即 24 。</p>
 <hr>
@@ -521,7 +521,7 @@
 </ol>
 <p>例子：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">C</span>&#123;</span></span><br><span class="line">    <span class="keyword">char</span> a;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">        <span class="keyword">char</span> b;</span><br><span class="line">        <span class="keyword">int</span> c;</span><br><span class="line">    &#125; ss;</span><br><span class="line">    <span class="keyword">short</span> d;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="keyword">sizeof</span>(C) &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
-<p>输出：==16==</p>
+<p>输出：<strong>16</strong></p>
 <p>char a 的偏移量为 0，占用 1Byte；但是对于展开后的结构体的第一个成员 char b，下一个可用的地址的偏移量为 1，不是被展开结构体中最大成员 int c 的整数倍，需补充 3Byte 才能是偏移量变为 4；char b 占用 1Byte，下一个可用地址的偏移量是 5，又不是 int c 大小的整数倍，又需补充 3Byte 变为 8；short d 的偏移量为 12，满足 short 的对齐方式。</p>
 <p>故所有成员变量都分配了空间，空间总的大小为 1+3+1+3+4+2 = 14，结尾还得填充 2Byte，以满足为 4 的倍数，所以总的大小为 16。</p>
 <hr>
@@ -530,7 +530,7 @@
 <blockquote>
 <p>摘自《后台开发：核心技术与应用实践》例1.16，书中后面的解释有部分错误。</p>
 </blockquote>
-<p>输出：==64==</p>
+<p>输出：<strong>64</strong></p>
 <p>假设测试机器是 64 位。UDATE 是一个 union，作为变量公用空间。里面占用字节数最多的变量是数组 int k[5]，有 20Byte，但是它要与 long 类型的 8Byte 对齐，所以占用 24Byte。data 是一个 struct，每个变量分开占用空间，依次为 int(4+4) + UDATE(24) + double(8) = 40，字节已对齐，故 sizeof(struct data) 是 40。所以最后的结果为 40+24 = 64。</p>
 <hr>
 <h4 id="类对象的大小"><a href="#类对象的大小" class="headerlink" title="类对象的大小"></a>类对象的大小</h4><p>关于类占用的内存空间，有以下几点需要注意：</p>
@@ -544,9 +544,10 @@
 <li><p>类成员采用字节对齐的方式分配空间。</p>
 </li>
 </ol>
+<p><strong>总的来说</strong>，类对象占用的内存空间为：<u>非静态成员变量总和</u> 加上 <u>编译器为了 CPU 计算做出的数据对齐处理</u> 和 <u>支持虚函数所产生的负担</u> 的总和。</p>
 <p>例子：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">class B&#123;</span><br><span class="line">    public:</span><br><span class="line">        virtual void funa();</span><br><span class="line">        virtual void funb();</span><br><span class="line">        void func();</span><br><span class="line">        static void fund();</span><br><span class="line">        static int si; </span><br><span class="line"></span><br><span class="line">    private:</span><br><span class="line">        char c;</span><br><span class="line">        int i;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-<p>以上类的大小：==sizeof(B) = 12（32位）==；==sizeof(B) = 16（64位）==。</p>
+<p>以上类的大小：<strong>sizeof(B) = 12（32位）</strong>；<strong>sizeof(B) = 16（64位）</strong>。</p>
 <p>根据以上的规则，多个虚函数只建立一张虚函数表，类中只存有一个指向虚函数表首地址的指针；普通函数 <code>func()</code> 不计入；静态成员 <code>fund()</code> 与 <code>si</code> 也不计入；char c 占用 1Byte，再需补充 3Byte；int i 占用 4Byte。所以总的大小为：一个指针大小+1+3+4。32位系统指针大小为 4Byte，所以为 12Byte；64位系统指针大小为 8Byte，所以总大小为 16Byte。</p>
 <hr>
 
@@ -720,7 +721,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">36</span>
+                  <span class="site-state-item-count">37</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -731,7 +732,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-count">15</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -742,7 +743,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">55</span>
+                  <span class="site-state-item-count">57</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
