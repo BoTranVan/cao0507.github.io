@@ -64,8 +64,8 @@
         <category>Kubernetes</category>
       </categories>
       <tags>
-        <tag>kubeadm</tag>
         <tag>Bugs</tag>
+        <tag>kubeadm</tag>
       </tags>
   </entry>
   <entry>
@@ -135,6 +135,17 @@
       </categories>
       <tags>
         <tag>socket</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[基本排序算法实现]]></title>
+    <url>%2F2018%2F10%2F25%2F%E5%9F%BA%E6%9C%AC%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0%2F</url>
+    <content type="text"><![CDATA[基本的排序算法实现本文介绍一些常见的基本排序算法的实现，以及相应的时间空间负责度分析。包括冒泡排序、插入排序、选择排序、归并排序、快速排序、堆排序这六种比较排序算法，以及计数排序这种线性时间排序算法。算法基于 C++ 语言实现。 1. 冒泡排序学的第一个算法估计就是冒泡排序算法了。原理很简单，每次从左到右两两比较，把大的交换到后面，每次都会把当前未排序数组的最大元素放到最右边。 步骤： 从左开始比较相邻的两个元素 nums[j] 和 nums[j+1]，如果 nums[j] &gt; nums[j+1] 就交换两者； 执行比较和交换，直到到达当前未排序数组的最后一个元素； 重复执行 1 和 2，直到当前未排序数组只有一个元素。 123456789101112void bubble_sort(vector&lt;int&gt; &amp;nums)&#123; vector&lt;int&gt;::size_type i, j; for (i = 0; i &lt; nums.size()-1; i++)&#123; for (j = 0; j+1 &lt; nums.size()-i; j++)&#123; if (nums[j] &gt; nums[j+1])&#123; int temp = nums[j]; nums[j] = nums[j+1]; nums[j+1] = temp; &#125; &#125; &#125; &#125; 复杂度分析： 由于我们需要执行 n 次冒泡，每次冒泡要执行 n 次比较（实际是 1 到 n 的等差数列，也就是 (1+n)n/2 ），所以总的时间复杂度是 O(n^2) ；只需要常数个额外的元素空间存储临时数据，空间复杂度为 O(1)。 2. 插入排序插入排序的原理是从左向右，把当前位置的数与它前面的数进行比较，找到最适合它的位置放入，使前面部分有序。 步骤： 选出当前位置的数 nums[i]，从左向右，将 nums[i] 与它前面的每一个元素相比较，如果 nums[i] &lt; nums[j]，则将 nums[i] 与 nums[j] 交换； 再选择 nums[i+1] 与其前面的数进行比较。 1234567891011void insert_sort(vector&lt;int&gt; &amp;nums)&#123; for (size_t i = 1; i &lt; nums.size(); i++)&#123; for (size_t j = 0; j &lt; i; j++)&#123; if (nums[i] &lt; nums[j])&#123; int temp = nums[i]; nums[i] = nums[j]; nums[j] = temp; &#125; &#125; &#125; &#125; 复杂度分析： 总共要插入 n 次，每次插入的复杂度是 O(n)，所以总的时间复杂度为 O(n^2)，空间复杂度为 O(1)。 3. 选择排序选择排序的原理是，每次都从乱序数组中找到最小值，放到当前乱序数组头部，最终使数组有序。 步骤： 从左开始，选择后面元素中最小值，和当前元素交换； 直到未排序数组只有一个元素。 12345678910111213void select_sort(vector&lt;int&gt; &amp;nums)&#123; for (size_t i = 0; i &lt; nums.size()-1; i++)&#123; size_t min_index = i; for (size_t j = i+1; j &lt; nums.size(); j++)&#123; if (nums[j] &lt; nums[min_index])&#123; min_index = j; &#125; &#125; int temp = nums[i]; nums[i] = nums[min_index]; nums[mid_index] = temp; &#125; &#125; 复杂度分析： 需要选择 n 次最小值，且每次选择最小值的复杂度又是 O(n)，所以总共的时间复杂度为 O(n^2)；空间复杂度为 O(1)。 4. 归并排序归并排序是采用分治法的一个典型例子。这个排序的特点是把一个数组打散成小数组，然后再把小数组拼凑再排序，直到最终数组有序。 步骤： 把当前数组分化成 n 个单位为 1 的子数组，然后两两比较合并单位为 2 的 n/2 个子数组； 继续进行这个过程，按照 2 的倍数进行子数组的比较合并，直到最终数组有序； 1234567891011121314151617181920212223242526272829303132void merge_sort(vector&lt;int&gt; &amp;nums)&#123; _merge_sort(nums, 0, nums.size()-1); &#125; void _merge_sort(vector&lt;int&gt; &amp;nums, int begin, int end)&#123; if (begin &lt; end)&#123; int mid = (begin + end)/2; _merge_sort(nums, begin, mid); _merge_sort(nums, mid+1, end); _merge(nums, begin, mid, end); &#125; &#125; void _merge(vector&lt;int&gt; &amp;nums, int begin, int mid, int end)&#123; vector&lt;int&gt; tmp; /* 非空间原址排序 */ int i = begin, j = mid+1; while ( (i != mid+1) &amp;&amp; (j != end+1) )&#123; if (nums[i] &lt;= nums[j]) tmp.push_back(nums[i++]); else tmp.push_back(nums[j++]); &#125; while ( i != mid+1 ) tmp.push_back(nums[i++]); while ( j != end+1 ) tmp.push_back(nums[j++]); for (size_t i = 0; i &lt; tmp.size(); i++) nums[begin+i] = tmp[i]; &#125; 复杂度分析： 采用分治法，可以将循环的次数减少为 logn，所以总共的时间复杂度为 O(nlogn)； 因为在合并数组时需要申请一个临时数组，所以算法的空间复杂度为 O(n)。 5. 快速排序快速排序算法也是利用分治法实现的一个排序算法。快速排序与归并排序不同，它不是一半一半的分子数组，而是选择一个主元，把比这个数小的挪到左边，把比这个数大的移到右边。然后不断对左右两部分也执行相同的步骤，直到整个数组有序。 步骤： 选择一个主元，一般选择最后一个元素（或者随机选取，保证平均性能）； 将小于主元的移到左边，大于主元的移到右边； 递归的对子数组重复执行1,2，直到整个数组有序。 123456789101112131415161718192021222324void quick_sort(vector&lt;int&gt; &amp;nums)&#123; _quick_sort(nums, 0, nums.size()-1); &#125; void _quick_sort(vector&lt;int&gt; &amp;nums, int p, int r)&#123; if (p &lt; r)&#123; int q = _partition(nums, p, r); _quick_sort(nums, p, q-1); _quick_sort(nums, q+1, r); &#125; &#125; int _partition(vector&lt;int&gt; &amp;nums, int p, int r)&#123; int x = nums[r]; int i = p-1; for (int j = p; j &lt; r; j++)&#123; if (nums[j] &lt;= x)&#123; i = i+1; swap(nums[i], nums[j]); &#125; &#125; swap(nums[i+1], nums[r]); return i+1; &#125; 复杂度分析： 快速排序算法的平均时间复杂度为 O(nlogn)，但存在一些情况使得其时间复杂度为 O(n^2)，如数组是已排序的情况； 时间复杂度为 O(1)。 6. 堆排序堆排序常用于求一个数组中最大 k 个元素。因为堆实际上是一个完全二叉树，所以用它可以用一维数组来表示。因为最大堆的第一位总为单签堆中的最大值，所以每次将最大值移除后，调整堆即可获得下一个最大值，通过一遍一遍执行这个过程就可以得到前 k 大元素，或者使堆有序。（最小堆的概念与最大堆对应） 步骤： 构造最大堆：首先将当前元素放入最大堆下一个位置，然后将此元素依次和它的父节点比较，如果大于父节点就和父节点交换，直到比较到根节点。重复执行到最后一个元素。 调整最大堆：即将根节点移除后重新整理堆。整理方法为将根节点和最后一个节点交换，然后把堆看做n-1长度，将当前根节点逐步移动到其应该在的位置。 堆排序：重复执行2，直到所有根节点都已移除。 123456789101112131415161718192021222324252627void heap_sort(vector&lt;int&gt; &amp;nums)&#123; build_heap(nums); int heap_size = nums.size(); for (int i = nums.size()-1; i &gt; 0; i--)&#123; swap(nums[0], nums[i]); heap_size--; heapify(nums, 0, heap_size); &#125; &#125; void build_heap(vector&lt;int&gt; &amp;nums)&#123; for (int i = nums.size()/2 - 1; i &gt;= 0; i--) heapify(nums, i, nums.size()-1); &#125; void heapify(vector&lt;int&gt; &amp;nums, int root, int heap_size)&#123; int left = 2*root, right = 2*root+1; int max_index = root; if ( left &lt; heap_size &amp;&amp; nums[left] &gt; nums[root] ) max_index = left; if ( right &lt; heap_size &amp;&amp; nums[right] &gt; nums[max_index] ) max_index = right; if ( max_index != root )&#123; swap(nums[max_index], nums[root]); heapify(nums, max_index, heap_size); &#125; &#125; 复杂度分析： 堆执行一次调整需要 O(logn) 的时间，在排序过程中需要遍历所有元素执行堆调整，所以最终时间复杂度为 O(nlogn)；空间复杂度为 O(1)。 7. 计数排序计数排序假设 n 个输入元素中的每一个都是在 0 到 k 区间内的一个整数，其中 k 为某个整数。当 k = O(n) 时，排序的运行时间为 O(n)。 计数排序的基本思想是：对每一个输入元素 x，确定小于 x 的元素个数。利用这一信息，就可以直接把 x 放到它在输出数组中的位置上了。 在计数排序算法的代码中，假设输入是一个数组 nums[0..n-1]，nums.size() = n。我们还需要两个数组： ans[0..n-1] 存放排序的输出，C[0..k] 提供临时存储空间。 12345678910111213void count_sort(vector&lt;int&gt; &amp;nums, vector&lt;int&gt; &amp;ans, int k)&#123; vector&lt;int&gt; C(k+1, 0); for (size_t i = 0; i &lt; nums.size(); i++) C[nums[i]] = C[nums[i]] + 1; for (int j = 1; j &lt;= k; j++) C[j] += C[j-1]; for (int i = nums.size()-1; i &gt;= 0; i--)&#123; ans[C[nums[i]]-1] = nums[i]; C[nums[i]] -= 1; &#125; &#125; 复杂度分析： 时间复杂度为 O(n)，空间复杂度也为 O(n)。]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>排序算法</tag>
       </tags>
   </entry>
   <entry>
@@ -329,8 +340,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>shadowsocks</tag>
         <tag>centos</tag>
+        <tag>shadowsocks</tag>
         <tag>BBR</tag>
       </tags>
   </entry>
@@ -413,8 +424,8 @@
         <category>云计算</category>
       </categories>
       <tags>
-        <tag>Openstack</tag>
         <tag>KVM</tag>
+        <tag>Openstack</tag>
         <tag>云计算</tag>
         <tag>虚拟化</tag>
       </tags>
@@ -452,8 +463,8 @@
         <category>KVM</category>
       </categories>
       <tags>
-        <tag>Openstack</tag>
         <tag>KVM</tag>
+        <tag>Openstack</tag>
         <tag>vnc</tag>
         <tag>ubuntu</tag>
         <tag>Virtual Machine</tag>
