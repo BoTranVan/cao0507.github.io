@@ -12,6 +12,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[查找数组中重复的元素]]></title>
+    <url>%2F2019%2F03%2F20%2F%E6%9F%A5%E6%89%BE%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E5%85%83%E7%B4%A0%2F</url>
+    <content type="text"><![CDATA[题目描述在一个长度为 n 的数组里的所有数字都在 0 到 n-1 的范围内。数组中某些数字是重复的，但不知道有几个数字是重复的。也不知道每个数字重复几次。请找出数组中任意一个重复的数字。 例如，如果输入长度为 7 的数组{2, 3, 1, 0, 2, 5, 3}，那么对应的输出是第一个重复的数字 2。 解法思路常规思路最简单的方法就是用一个集合 set，遍历数组的每一个元素，在 set 中查找是否存在该元素，如果存在则返回；不存在则放入集合，并继续循环。 复杂度： 空间复杂度为：O(N) 时间复杂度为：O(NlogN) （遍历数组为 O(N)，set 中查找为 O(logN)） 代码如下： 1234567891011bool duplicate(int numbers[], int n, int* duplication) &#123; set&lt;int&gt; Set; for (int i = 0; i &lt; numbers.size(); i++)&#123; if (Set.find(numbers[i]) != Set.end())&#123; *duplication = numbers[i]; return true; &#125; Set.insert(numbers[i]); &#125; return false;&#125; 改进：使用hash表使用一个长度为 n 的数组来作为 hash 表，初始化为 0。然后遍历数组，利用数组元素作为 hash 表的索引，如果其对应的值为 1，说明是第二次访问该索引，那么该索引就是原数组中重复的元素；如果其对应的值为 0，说明是第一次访问，设置为 1。 复杂度： 空间复杂度为：O(N) 时间复杂度为：O(N) 代码如下： 123456789101112bool duplicate(int numbers[], int length, int* duplication) &#123; int hash_table[length]; for (int i = 0; i &lt; length; i++)&#123; if (hash_table[numbers[i]] == 1)&#123; *duplication = numbers[i]; return true; &#125; else hash_table[numbers[i]] = 1; &#125; return false;&#125; 常数空间上面的方法都会使用 O(N) 的内存空间，如果只能使用 O(1) 的空间，那么可以考虑下面的方法。 一种类似于基数排序的方法： 索引 i 从 0 开始遍历数组， 如果 i == numbers[i]，说明 numbers[i] 在正确的位置上； 如果 i != numbers[i]， 如果 numbers[i] != numbers[numbers[i]]，交换 numbers[i] 和 numbers[numbers[i]]，那么 numbers[numbers[i]] 将会在正确的位置上。 否则 numbers[i] == numbers[numbers[i]]，那么就找到了 numbers[i]。 复杂度： 空间复杂度：O(1) 时间复杂度：O(N) 代码如下： 1234567891011121314bool duplicate(int numbers[], int length, int* duplication) &#123; for (int i = 0; i &lt; length; ++i)&#123; while (i != numbers[i])&#123; if (numbers[i] == numbers[numbers[i]])&#123; *duplication = numbers[i]; return true; &#125; else&#123; swap(numbers[i], numbers[numbers[i]]); &#125; &#125; &#125; return false;&#125;]]></content>
+      <categories>
+        <category>algorithm</category>
+      </categories>
+      <tags>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[C/C++中 sizeof 的用法总结]]></title>
     <url>%2F2019%2F03%2F12%2FC-%E4%B8%ADsizeof%E7%9A%84%E7%94%A8%E6%B3%95%E6%80%BB%E7%BB%93%2F</url>
     <content type="text"><![CDATA[sizeof 运算符需要注意的是 sizeof() 是运算符，而不是一个函数，在编译时就计算好了，用于计算数据空间的字节数。因此，sizeof 不能用来返回动态分配的内存空间的大小。sizeof 常用于返回类型和静态分配的对象、结构或数组所占的空间，返回值跟对象、结构、数组所存储的内容没有关系。 本文将介绍使用 sizeof 来判定 共用体、结构体、嵌套结构体、混合结构体 以及 类对象 所占空间的大小。 不同数据类型所占的内存大小 32 位 64 位 char 1 1 int 4 4 short 2 2 long 4 8 float 4 4 double 8 8 指针 4 8 long 类型与指针类型在 32 位机器上只占 4 字节，在 64 位机器上占 8 字节。其他类型在 32 位机器和 64 位机器都是占同样的大小空间。 共用体的大小1234567union A&#123; int a[5]; char b; double c;&#125;;cout &lt;&lt; sizeof(A) &lt;&lt; endl; 上面求出共用体的大小为：24 union 中变量共用内存，应以最长的为准，A 中最长的成员是数组 a，其长度为 20。与结果不一样，这是因为在共用体内变量的默认对齐方式，必须以最长的 double（8Byte）对齐，所以得到 sizeof(A) = 24。所以将共用体内的 int a[5] 修改成 int a[6] 后，结果仍然不变；但如果将 int a[5] 修改成 int a[7]，结果就变成 32。 对齐系数：每个平台上的编译器都有默认对齐系数 n，但是可以通过 #pragma pack(n) 来设定。 有效对齐系数：对于一个复杂类型变量，有效对齐系数 = min(对齐系数 n，复杂类型中最长数据类型的长度)。比如设定的对齐系数为 8，而结构体中最长的是 int，4个字节，那么有效对齐值为 4。 通过下面的例子说明有效对齐系数： 123456789#pragma pack(4)union A&#123; int a[5]; char b; double c;&#125;;cout &lt;&lt; sizeof(A) &lt;&lt; endl; 输出为：20 这是因为通过 #pragma pack(n) 设置对齐系数为 4，所以实际的有效对齐系数为：min(4, sizeof(double)) = 4，所以最后共用体 A 的大小为 5*int(4) = 20。 结构体的大小首先介绍一个概念和两条原则： 偏移量 ：偏移量指的是 结构体变量中成员的地址 和 结构体变量地址 的差。 存储变量时地址要求对齐，编译器在编译程序时会遵循两条原则： 结构体变量中成员的偏移量必须是成员大小的整数倍。 结构体大小必须是所有成员大小的整数倍，也即所有成员大小的公倍数。 例子： 1234567struct B&#123; char a; double b; int c;&#125;;cout &lt;&lt; sizeof(B) &lt;&lt; endl; 输出为：24 这是因为 char a 的偏移量为 0，占用 1Byte；double b 指的下一个可用的地址的偏移量为 1，不是 sizeof(double)=8 的整数倍，需要补足 7Byte 才能是偏移量为 8；int c 指的下一个可用的地址的偏移量为 16，是 sizeof(int)=4 的整数倍，满足 int 的对齐方式。 故所有成员的变量都分配了空间，空间总的大小为 1+7+8+4 = 20，不是结构的节边界数（即结构中占用最大空间的类型所占用的字节数 sizeof(double)=8）的倍数，所以需要填充 4Byte，以满足结构的大小为 sizeof(double)=8 的倍数，即 24 。 嵌套结构体的大小对于嵌套的结构体，需要将其展开。对嵌套结构体求 sizeof 时，上述原则变为： 展开后的结构体的第一个成员的偏移量应当是被展开的结构体中最大的成员的整数倍。 结构体大小必须是所有成员大小的整数倍，这里所有成员计算的是展开后的成员，而不是将嵌套的结构体当做一个整体。 例子： 12345678910struct C&#123; char a; struct&#123; char b; int c; &#125; ss; short d;&#125;;cout &lt;&lt; sizeof(C) &lt;&lt; endl; 输出：16 char a 的偏移量为 0，占用 1Byte；但是对于展开后的结构体的第一个成员 char b，下一个可用的地址的偏移量为 1，不是被展开结构体中最大成员 int c 的整数倍，需补充 3Byte 才能是偏移量变为 4；char b 占用 1Byte，下一个可用地址的偏移量是 5，又不是 int c 大小的整数倍，又需补充 3Byte 变为 8；short d 的偏移量为 12，满足 short 的对齐方式。 故所有成员变量都分配了空间，空间总的大小为 1+3+1+3+4+2 = 14，结尾还得填充 2Byte，以满足为 4 的倍数，所以总的大小为 16。 混合结构体的大小混合结构体指的是结构体中包含有共用体（或数组）等比较复杂的结构体。如下面的例子： 1234567891011121314151617#include &lt;iostream&gt;using namespace std;typedef union&#123; long i; int k[5]; char c;&#125; UDATE;struct data&#123; int cat; UDATE cow; double dog;&#125;too;UDATE temp;int main()&#123; cout &lt;&lt; sizeof(struct data) + sizeof(temp) &lt;&lt; endl; return 0;&#125; 摘自《后台开发：核心技术与应用实践》例1.16，书中后面的解释有部分错误。 输出：64 假设测试机器是 64 位。UDATE 是一个 union，作为变量公用空间。里面占用字节数最多的变量是数组 int k[5]，有 20Byte，但是它要与 long 类型的 8Byte 对齐，所以占用 24Byte。data 是一个 struct，每个变量分开占用空间，依次为 int(4+4) + UDATE(24) + double(8) = 40，字节已对齐，故 sizeof(struct data) 是 40。所以最后的结果为 40+24 = 64。 类对象的大小关于类占用的内存空间，有以下几点需要注意： 如果类中含有虚函数，则编译器需要为类构建虚函数表，类中需要存储一个指针指向这个虚函数表的首地址，注意不管有几个虚函数，都只建立一张表，所有的虚函数地址都存在这张表里，类中只需要一个指针指向虚函数表首地址即可。 类中的静态成员是被类所有实例所共享的，它不计入sizeof计算的空间。 类中的普通函数或静态普通函数都存储在栈中，不计入sizeof计算的空间。 类成员采用字节对齐的方式分配空间。 总的来说，类对象占用的内存空间为：非静态成员变量总和 加上 编译器为了 CPU 计算做出的数据对齐处理 和 支持虚函数所产生的负担 的总和。 例子： 123456789101112class B&#123; public: virtual void funa(); virtual void funb(); void func(); static void fund(); static int si; private: char c; int i;&#125;; 以上类的大小：sizeof(B) = 12（32位）；sizeof(B) = 16（64位）。 根据以上的规则，多个虚函数只建立一张虚函数表，类中只存有一个指向虚函数表首地址的指针；普通函数 func() 不计入；静态成员 fund() 与 si 也不计入；char c 占用 1Byte，再需补充 3Byte；int i 占用 4Byte。所以总的大小为：一个指针大小+1+3+4。32位系统指针大小为 4Byte，所以为 12Byte；64位系统指针大小为 8Byte，所以总大小为 16Byte。]]></content>
@@ -75,8 +86,8 @@
         <category>Kubernetes</category>
       </categories>
       <tags>
-        <tag>kubeadm</tag>
         <tag>Bugs</tag>
+        <tag>kubeadm</tag>
       </tags>
   </entry>
   <entry>
@@ -351,8 +362,8 @@
         <category>VPN</category>
       </categories>
       <tags>
-        <tag>shadowsocks</tag>
         <tag>centos</tag>
+        <tag>shadowsocks</tag>
         <tag>BBR</tag>
       </tags>
   </entry>
@@ -435,10 +446,10 @@
         <category>云计算</category>
       </categories>
       <tags>
+        <tag>KVM</tag>
+        <tag>Openstack</tag>
         <tag>云计算</tag>
         <tag>虚拟化</tag>
-        <tag>Openstack</tag>
-        <tag>KVM</tag>
       </tags>
   </entry>
   <entry>
@@ -474,8 +485,8 @@
         <category>KVM</category>
       </categories>
       <tags>
-        <tag>Openstack</tag>
         <tag>KVM</tag>
+        <tag>Openstack</tag>
         <tag>vnc</tag>
         <tag>ubuntu</tag>
         <tag>Virtual Machine</tag>
